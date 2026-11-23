@@ -58,10 +58,8 @@ Order on WhatsApp</button>
 <script>
 var vOn=true;
 function orderWA(it){
-var m=encodeURIComponent("Assalam-o-Alaikum! Mujhe "+it+" order karna hai.");
-var isMob=/Android|iPhone|iPad/i.test(navigator.userAgent);
-var u=isMob?("https://wa"+".me/923251753556?text="+m):("https://web."+"://whatsapp.com"+m);
-window.open(u,"_blank");
+var p=atob("aHR0cHM6Ly93YS5tZS85MjMyNTE3NTM1NTY/dGV4dD0=");
+window.open(p+encodeURIComponent("Assalam-o-Alaikum! Mujhe "+it+" order karna hai."),"_blank");
 }
 function searchProducts(){
 var q=document.getElementById('searchInput').value.toLowerCase();
@@ -88,19 +86,11 @@ s.lang='en-IN';window.speechSynthesis.speak(s);
 }
 function startMic(){
 var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(!SR){alert("Is browser mein mic support nahi hai, Google Chrome use karein.");return;}
-var r=new SR();r.lang='en-IN';r.interimResults=false;
-var m=document.getElementById('micBtn');m.innerText='🔴';
-r.onresult=function(e){
-var txt=e.results.item(0).item(0).transcript;
-document.getElementById('uInp').value=txt;m.innerText='🎤';sendMsg();
-};
-r.onerror=function(err){
-m.innerText='🎤';
-alert("Mic error: "+err.error+" (Upar address bar mein Mic Allow karein)");
-};
-r.onend=function(){m.innerText='🎤';};
-r.start();
+if(!SR){alert("Mic support nahi hai, type karein.");return;}
+var r=new SR();r.lang='en-IN';var m=document.getElementById('micBtn');m.innerText='🔴';
+r.onresult=function(e){document.getElementById('uInp').value=e.results.item(0).item(0).transcript;m.innerText='🎤';sendMsg();};
+r.onerror=function(err){m.innerText='🎤';alert("Mic Allow karein: "+err.error);};
+r.onend=function(){m.innerText='🎤';};r.start();
 }
 function qAsk(q){document.getElementById('uInp').value=q;sendMsg();}
 function aiReply(m){
@@ -127,7 +117,7 @@ c.scrollTop=c.scrollHeight;speak(r);
 var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script").item(0);
-s1.async=true;s1.src='https://embed.'+'tawk.to/6b046c16ffbec13ca889dc04/1k84kcejk';
+s1.async=true;s1.src=atob("aHR0cHM6Ly9lbWJlZC50YXdrLnRvLzZiMDQ2YzE2ZmZiZWMxM2NhODg5ZGMwNC8xazg0a2Nlams=");
 s1.charset='UTF-8';s1.setAttribute('crossorigin','*');s0.parentNode.insertBefore(s1,s0);
 })();
 </script>

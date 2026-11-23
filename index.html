@@ -25,7 +25,7 @@
             <img src="shoes brand.png" alt="Black Brand Shoes" style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;">
             <h2 style="color: #FBBF24; font-size: 22px; margin: 12px 0 5px;">Black Brand Shoes</h2>
             <p style="color: #D1D5DB; font-size: 18px; font-weight: bold; margin: 5px 0 15px;">Rs. 3,500</p>
-            <a href="https://wa.me." target="_blank" 
+            <a href="https://whatsapp.com." target="_blank" 
                style="display: inline-block; background-color: #25D366; color: white; text-decoration: none; padding: 10px 22px; border-radius: 25px; font-weight: bold; font-size: 15px;">
                Order on WhatsApp
             </a>
@@ -36,7 +36,7 @@
             <img src="Dress vip.png" alt="VIP Party Suit" style="width: 100%; height: 220px; object-fit: cover; border-radius: 10px;">
             <h2 style="color: #FBBF24; font-size: 22px; margin: 12px 0 5px;">VIP Party Suit</h2>
             <p style="color: #D1D5DB; font-size: 18px; font-weight: bold; margin: 5px 0 15px;">Rs. 4,800</p>
-            <a href="https://wa.me." target="_blank" 
+            <a href="https://whatsapp.com." target="_blank" 
                style="display: inline-block; background-color: #25D366; color: white; text-decoration: none; padding: 10px 22px; border-radius: 25px; font-weight: bold; font-size: 15px;">
                Order on WhatsApp
             </a>
@@ -48,17 +48,17 @@
     <p style="color: #6B7280; font-size: 14px; margin-top: 40px; margin-bottom: 70px;">© 2026 Noman VIP Store • Voice AI & Live Support</p>
 
     <!-- Floating Voice AI Chatbot Button (Bottom-Left) -->
-    <button type="button" onclick="toggleChat()" style="position: fixed; bottom: 20px; left: 20px; background-color: #FBBF24; color: #111827; border: none; border-radius: 50px; padding: 14px 20px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.5); z-index: 9999;">
+    <button type="button" id="aiToggleBtn" style="position: fixed; bottom: 20px; left: 20px; background-color: #FBBF24; color: #111827; border: none; border-radius: 50px; padding: 14px 20px; font-size: 15px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.5); z-index: 99999;">
         🤖 Voice AI Assistant
     </button>
 
     <!-- Voice AI Chat Window (Bottom-Left) -->
-    <div id="aiChatBox" style="display: none; position: fixed; bottom: 80px; left: 20px; width: 320px; max-width: 90vw; background-color: #1F2937; border: 2px solid #FBBF24; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.6); overflow: hidden; text-align: left; z-index: 9999;">
+    <div id="aiChatBox" style="display: none; position: fixed; bottom: 80px; left: 20px; width: 320px; max-width: 90vw; background-color: #1F2937; border: 2px solid #FBBF24; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.6); overflow: hidden; text-align: left; z-index: 99999;">
         <div style="background-color: #FBBF24; color: #111827; padding: 12px 15px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
             <span>🤖 Noman Store Voice AI</span>
             <div style="display: flex; gap: 12px; align-items: center;">
-                <span id="voiceToggle" onclick="toggleVoice()" title="Awaz On/Off" style="cursor: pointer; font-size: 18px;">🔊</span>
-                <span onclick="toggleChat()" style="cursor: pointer; font-size: 18px;">✖</span>
+                <span id="voiceToggle" title="Awaz On/Off" style="cursor: pointer; font-size: 18px;">🔊</span>
+                <span id="closeChatBtn" style="cursor: pointer; font-size: 18px;">✖</span>
             </div>
         </div>
 
@@ -69,16 +69,16 @@
         </div>
 
         <div style="padding: 6px 10px; background-color: #111827; display: flex; gap: 5px; flex-wrap: wrap;">
-            <button type="button" onclick="quickAsk('Suit ki qeemat kya hai?')" style="background: #374151; color: #FBBF24; border: 1px solid #FBBF24; border-radius: 12px; padding: 4px 8px; font-size: 11px; cursor: pointer;">Suit Price?</button>
-            <button type="button" onclick="quickAsk('Shoes kitne ke hain?')" style="background: #374151; color: #FBBF24; border: 1px solid #FBBF24; border-radius: 12px; padding: 4px 8px; font-size: 11px; cursor: pointer;">Shoes Price?</button>
-            <button type="button" onclick="quickAsk('Delivery aur payment ka kya tareeqa hai?')" style="background: #374151; color: #FBBF24; border: 1px solid #FBBF24; border-radius: 12px; padding: 4px 8px; font-size: 11px; cursor: pointer;">Delivery & Payment?</button>
+            <button type="button" class="quick-btn" data-q="Suit ki qeemat kya hai?" style="background: #374151; color: #FBBF24; border: 1px solid #FBBF24; border-radius: 12px; padding: 4px 8px; font-size: 11px; cursor: pointer;">Suit Price?</button>
+            <button type="button" class="quick-btn" data-q="Shoes kitne ke hain?" style="background: #374151; color: #FBBF24; border: 1px solid #FBBF24; border-radius: 12px; padding: 4px 8px; font-size: 11px; cursor: pointer;">Shoes Price?</button>
+            <button type="button" class="quick-btn" data-q="Delivery aur payment ka kya tareeqa hai?" style="background: #374151; color: #FBBF24; border: 1px solid #FBBF24; border-radius: 12px; padding: 4px 8px; font-size: 11px; cursor: pointer;">Delivery & Payment?</button>
         </div>
 
         <div style="display: flex; border-top: 1px solid #374151; background-color: #111827; align-items: center;">
-            <button type="button" id="micBtn" onclick="startVoiceInput()" title="Bol kar sawal poochein" style="background: transparent; border: none; color: #FBBF24; font-size: 18px; padding: 0 10px; cursor: pointer;">🎤</button>
-            <input type="text" id="userInput" onkeypress="if(event.key==='Enter') sendMessage()" placeholder="Likhein ya bol kar poochein..." 
+            <button type="button" id="micBtn" title="Bol kar sawal poochein" style="background: transparent; border: none; color: #FBBF24; font-size: 18px; padding: 0 10px; cursor: pointer;">🎤</button>
+            <input type="text" id="userInput" placeholder="Likhein ya bol kar poochein..." 
                    style="flex: 1; padding: 10px 5px; border: none; background: transparent; color: white; outline: none; font-size: 13px;">
-            <button type="button" onclick="sendMessage()" style="background-color: #FBBF24; color: #111827; border: none; padding: 10px 14px; font-weight: bold; cursor: pointer;">Send</button>
+            <button type="button" id="sendBtn" style="background-color: #FBBF24; color: #111827; border: none; padding: 10px 14px; font-weight: bold; cursor: pointer;">Send</button>
         </div>
     </div>
 
@@ -88,11 +88,11 @@
 
         function searchProducts() {
             var input = document.getElementById('searchInput').value.toLowerCase();
-            var cards = document.getElementsByClassName('product-card');
-            for (var i = 0; i < cards.length; i++) {
-                var title = cards[i].getElementsByTagName('h2').innerText.toLowerCase();
-                cards[i].style.display = title.indexOf(input) > -1 ? "block" : "none";
-            }
+            var cards = document.querySelectorAll('.product-card');
+            cards.forEach(function(card) {
+                var title = card.querySelector('h2').innerText.toLowerCase();
+                card.style.display = title.indexOf(input) > -1 ? "block" : "none";
+            });
         }
 
         function toggleChat() {
@@ -108,14 +108,6 @@
             }
         }
 
-        function toggleVoice() {
-            voiceEnabled = !voiceEnabled;
-            document.getElementById('voiceToggle').innerText = voiceEnabled ? '🔊' : '🔇';
-            if (!voiceEnabled && 'speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
-        }
-
         function speakText(htmlText) {
             if (!voiceEnabled || !('speechSynthesis' in window)) return;
             window.speechSynthesis.cancel();
@@ -126,40 +118,17 @@
             window.speechSynthesis.speak(speech);
         }
 
-        function startVoiceInput() {
-            var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("Aapke browser mein voice mic support nahi hai, baraye meharbani type karke poochein.");
-                return;
-            }
-            var recognition = new SpeechRecognition();
-            recognition.lang = 'ur-PK';
-            var micBtn = document.getElementById('micBtn');
-            micBtn.innerText = '🔴';
-            recognition.start();
-
-            recognition.onresult = function(event) {
-                var transcript = event.results.transcript;
-                document.getElementById('userInput').value = transcript;
-                micBtn.innerText = '🎤';
-                sendMessage();
-            };
-
-            recognition.onerror = function() {
-                micBtn.innerText = '🎤';
-            };
-            recognition.onend = function() {
-                micBtn.innerText = '🎤';
-            };
-        }
-
-        function quickAsk(text) {
-            document.getElementById('userInput').value = text;
-            sendMessage();
-        }
-
         function getAIReply(msg) {
             msg = msg.toLowerCase();
             var replies = [];
 
             if (msg.indexOf('salam') > -1 || msg.indexOf('hi') > -1 || msg.indexOf('hello') > -1 || msg.indexOf('aoa') > -1) {
+                replies.push("Walaikum Assalam! Noman VIP Store mein khush aamdeed.");
+            }
+            if (msg.indexOf('shoe') > -1 || msg.indexOf('joot') > -1 || msg.indexOf('boot') > -1) {
+                replies.push("<b>Black Brand Shoes</b> ki qeemat <b>Rs. 3,500</b> hai aur yeh premium quality mein available hain.");
+            }
+            if (msg.indexOf('suit') > -1 || msg.indexOf('dress') > -1 || msg.indexOf('kapr') > -1) {
+                replies.push("<b>VIP Party Suit</b> ki qeemat <b>Rs. 4,800</b> hai.");
+            }
+            if ((msg.indexOf('price') > -1 || msg.indexOf('qeemat') > -1 || msg.indexOf('rate') > -1 || msg.indexOf('ketne') > -1 || msg.indexOf('kitne') > -1) && msg.indexOf('shoe') === -1 && msg.indexOf('suit') === -1 && msg.indexOf('din') === -1) {

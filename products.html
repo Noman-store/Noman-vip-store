@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noman VIP Store - Select Sizes & Order</title>
+  <style>
+    body { background: #111827; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 20px; text-align: center; }
+    .back-btn { display: inline-block; margin-bottom: 20px; color: #FBBF24; text-decoration: none; font-weight: bold; border: 1px solid #FBBF24; padding: 8px 16px; border-radius: 20px; }
+    .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
+    .card { background: #1F2937; border: 1px solid #374151; border-radius: 15px; width: 300px; padding: 18px; }
+    .card img { width: 100%; height: 230px; object-fit: cover; border-radius: 10px; }
+    h2 { color: #FBBF24; margin: 12px 0 5px; }
+    .price { color: #10B981; font-size: 20px; font-weight: bold; margin: 5px 0 15px; }
+    .size-box { margin: 15px 0; }
+    .size-btn { background: #111827; color: #fff; border: 1px solid #4B5563; padding: 8px 14px; margin: 3px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    .size-btn.active { background: #FBBF24; color: #111827; border-color: #FBBF24; }
+    .wa-btn { background: #25D366; color: #fff; border: none; padding: 12px 24px; border-radius: 25px; font-weight: bold; font-size: 15px; cursor: pointer; width: 100%; margin-top: 10px; }
+    
+    /* Customer Address Box */
+    .address-box { background: #1F2937; border: 1px solid #FBBF24; border-radius: 15px; max-width: 630px; margin: 30px auto; padding: 20px; text-align: left; }
+    .address-box h3 { color: #FBBF24; margin-top: 0; text-align: center; }
+    .input-field { width: 100%; box-sizing: border-box; padding: 11px; margin: 8px 0 14px; border-radius: 8px; border: 1px solid #4B5563; background: #111827; color: #fff; font-size: 14px; }
+    
+    /* Footer */
+    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #374151; color: #9CA3AF; font-size: 13px; line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-btn">← Back to Home</a>
+  <h1 style="color:#FBBF24; margin-bottom:5px;">Select Your Size & Order</h1>
+  <p style="color:#9CA3AF; margin-top:0;">Pehle apna address likhein, phir size select karke WhatsApp par order karein</p>
+
+  <!-- Customer Delivery Details Box -->
+  <div class="address-box">
+    <h3>📦 Delivery Details (Apna Pata Likhein)</h3>
+    
+    <label style="font-size:13px; color:#D1D5DB;">Customer Name (Poora Naam):</label>
+    <input type="text" id="custName" class="input-field" placeholder="Maslan: Ali Raza">
+
+    <label style="font-size:13px; color:#D1D5DB;">Mobile / WhatsApp Number:</label>
+    <input type="tel" id="custPhone" class="input-field" placeholder="Maslan: 0300-1234567">
+
+    <label style="font-size:13px; color:#D1D5DB;">Complete Address & City (Shehar aur Mukammal Pata):</label>
+    <textarea id="custAddress" class="input-field" rows="2" placeholder="Ghar/Dukaan number, Mohalla/Street, aur Shehar ka naam..."></textarea>
+  </div>
+
+  <!-- Products Container -->
+  <div class="container">
+
+    <!-- 1. Dress / VIP Suit Card -->
+    <div class="card">
+      <img src="Dress vip.png" alt="VIP Party Suit">
+      <h2>VIP Party Suit</h2>
+      <p style="color:#9CA3AF; font-size:13px;">Premium Wash & Wear • Fine Stitching</p>
+      <div class="price">Rs. 4,800</div>
+      
+      <div class="size-box" id="suitSizes">
+        <p style="font-size:13px; color:#D1D5DB; margin-bottom:6px;">Select Suit Size:</p>
+        <button class="size-btn" onclick="selectSize('suit', 'S', this)">S</button>
+        <button class="size-btn" onclick="selectSize('suit', 'M', this)">M</button>
+        <button class="size-btn active" onclick="selectSize('suit', 'L', this)">L</button>
+        <button class="size-btn" onclick="selectSize('suit', 'XL', this)">XL</button>
+      </div>
+
+      <button class="wa-btn" onclick="orderNow('VIP Party Suit', 'Rs. 4,800', selectedSuit)">Order Suit on WhatsApp</button>
+    </div>
+
+    <!-- 2. Shoes Card -->
+    <div class="card">
+      <img src="shoes brand.png" alt="Black Brand Shoes">
+      <h2>Black Brand Shoes</h2>
+      <p style="color:#9CA3AF; font-size:13px;">Pure Leather Finish • Comfort Sole</p>
+      <div class="price">Rs. 3,500</div>
+
+      <div class="size-box" id="shoeSizes">
+        <p style="font-size:13px; color:#D1D5DB; margin-bottom:6px;">Select Shoe Number:</p>
+        <button class="size-btn" onclick="selectSize('shoe', '7', this)">7</button>
+        <button class="size-btn active" onclick="selectSize('shoe', '8', this)">8</button>
+        <button class="size-btn" onclick="selectSize('shoe', '9', this)">9</button>
+        <button class="size-btn" onclick="selectSize('shoe', '10', this)">10</button>
+      </div>
+
+      <button class="wa-btn" onclick="orderNow('Black Brand Shoes', 'Rs. 3,500', selectedShoe)">Order Shoes on WhatsApp</button>
+    </div>
+
+  </div>
+
+  <!-- Trust & Policy Footer -->
+  <div class="footer">
+    <strong style="color:#FBBF24; font-size:15px;">Noman VIP Store</strong><br>
+    🚚 Pure Pakistan mein Cash on Delivery (COD) Available • Delivery Time: 3 se 4 Din<br>
+    🔄 7 Days Easy Size Exchange Policy • 📞 WhatsApp Support: 0325-1753556
+  </div>
+
+  <script>
+    var selectedSuit = 'L';
+    var selectedShoe = '8';
+
+    function selectSize(type, size, btn) {
+      var parent = btn.parentElement;
+      var buttons = parent.getElementsByClassName('size-btn');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+      }
+      btn.classList.add('active');
+      if (type === 'suit') selectedSuit = size;
+      if (type === 'shoe') selectedShoe = size;
+    }
+
+    function orderNow(item, price, size) {
+      var name = document.getElementById('custName').value.trim();
+      var custPhone = document.getElementById('custPhone').value.trim();
+      var address = document.getElementById('custAddress').value.trim();
+
+      if (name === "" || custPhone === "" || address === "") {
+        alert("Meherbani farma kar upar apna Naam, Mobile Number, aur Address zaroor likhein!");
+        return;
+      }
+
+      var shopPhone = "923251753556";
+      var msg = "Assalam-o-Alaikum! *Noman VIP Store* se naya order:%0A%0A" +
+                "🛍️ *Item:* " + item + "%0A" +
+                "📏 *Size/Number:* " + size + "%0A" +
+                "💰 *Price:* " + price + "%0A%0A" +
+                "👤 *Name:* " + name + "%0A" +
+                "📞 *Phone:* " + custPhone + "%0A" +
+                "📍 *Address:* " + address + "%0A" +
+                "🚚 *Payment:* Cash on Delivery (COD)";
+
+      window.open("https://wa.me" + shopPhone + "?text=" + msg, "_blank");
+    }
+  </script>
+
+</body>
+</html>

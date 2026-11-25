@@ -1,162 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Noman VIP Store</title>
 <style>
-  * { box-sizing: border-box; }
-  body { background:#111827; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; text-align:center; }
-  .navbar { background:#0B0F19; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #374151; flex-wrap:wrap; gap:10px; }
-  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .logo-badge { background:#FBBF24; color:#111827; font-weight:900; font-size:18px; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
-  .logo-text { color:#FBBF24; font-size:19px; font-weight:bold; }
-  .nav-links a, .cart-btn { color:#fff; text-decoration:none; font-size:13px; font-weight:bold; margin-left:10px; }
-  .cart-btn { background:#FBBF24; color:#111827; border:none; padding:7px 14px; border-radius:20px; cursor:pointer; }
-  .hero { background:#1F2937; border-bottom:2px solid #FBBF24; padding:35px 20px; margin-bottom:20px; }
-  .hero h1 { color:#fff; font-size:30px; margin:5px 0 10px; }
-  .hero h1 span { color:#FBBF24; }
-  .cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:10px; }
-  .card { background:#1F2937; border:1px solid #374151; border-radius:15px; width:280px; padding:15px; }
-  .sel-row { display:flex; gap:6px; margin:8px 0; }
-  .sel-row select, .sel-row input { flex:1; padding:7px; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; }
-  .btn-gold { background:#FBBF24; color:#111827; border:none; padding:10px; border-radius:25px; font-weight:bold; cursor:pointer; width:100%; margin-top:6px; display:block; text-decoration:none; font-size:14px; }
-  .btn-green { background:#25D366; color:#fff; border:none; padding:10px; border-radius:25px; font-weight:bold; cursor:pointer; width:100%; margin-top:6px; font-size:14px; }
-  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; padding:20px; overflow-y:auto; }
-  .modal-box { background:#1F2937; border:2px solid #FBBF24; border-radius:15px; max-width:420px; margin:30px auto; padding:20px; text-align:left; }
-  .modal-box input, .modal-box select, .modal-box textarea { width:100%; padding:9px; margin:5px 0 10px; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; }
+body { background:#111827; color:#fff; font-family:Arial; margin:0; text-align:center; }
+.top { background:#0B0F19; padding:15px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #374151; }
+.brand { color:#FBBF24; font-size:20px; font-weight:bold; text-decoration:none; }
+.cartBtn { background:#FBBF24; color:#111827; border:none; padding:8px 15px; border-radius:20px; font-weight:bold; cursor:pointer; }
+.hero { background:#1F2937; padding:35px 15px; border-bottom:2px solid #FBBF24; }
+.grid { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
+.box { background:#1F2937; border:1px solid #374151; border-radius:15px; width:280px; padding:15px; }
+.box img { width:100%; height:200px; object-fit:cover; border-radius:10px; }
+select, input, textarea { width:100%; padding:8px; margin:5px 0; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; box-sizing:border-box; }
+.goldBtn { background:#FBBF24; color:#111827; border:none; padding:10px; width:100%; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:6px; }
+.greenBtn { background:#25D366; color:#fff; border:none; padding:10px; width:100%; border-radius:20px; font-weight:bold; cursor:pointer; margin-top:6px; }
+.popup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; padding:15px; overflow-y:auto; }
+.popupIn { background:#1F2937; border:2px solid #FBBF24; border-radius:15px; max-width:400px; margin:30px auto; padding:20px; text-align:left; }
 </style>
 </head>
 <body>
 
-<div class="navbar">
-  <a href="index.html" class="logo">
-    <div class="logo-badge">NV</div>
-    <span class="logo-text" id="sTitle">NOMAN VIP STORE</span>
-  </a>
-  <div class="nav-links">
-    <a href="products.html" style="color:#FBBF24;">Sizes Page</a>
-    <button type="button" class="cart-btn" onclick="showCart()">Cart (<span id="cCount">0</span>)</button>
+<div class="top">
+  <a href="index.html" class="brand" id="bName">NV | NOMAN VIP STORE</a>
+  <div>
+    <a href="products.html" style="color:#FBBF24;margin-right:10px;text-decoration:none;font-weight:bold;">Sizes Page</a>
+    <button type="button" class="cartBtn" id="openCartBtn">Cart (0)</button>
   </div>
 </div>
 
 <div class="hero">
-  <h1>Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
-  <p style="color:#9CA3AF;font-size:14px;">Multi-Order Cart, Size Selection aur 24/7 AI Salesman</p>
-  <a href="products.html" class="btn-gold" style="max-width:250px;margin:15px auto 0;">Open Size &amp; Address Page</a>
+  <h1 style="margin:0 0 8px;">Premium <span style="color:#FBBF24;">Suits</span> &amp; Luxury <span style="color:#FBBF24;">Shoes</span></h1>
+  <p style="color:#9CA3AF;margin:0 0 15px;">Multi-Order Cart • Color &amp; Size Selection • 24/7 AI Salesman</p>
+  <a href="products.html" style="background:#FBBF24;color:#111827;padding:10px 22px;border-radius:25px;text-decoration:none;font-weight:bold;display:inline-block;">Open Size &amp; Address Page</a>
 </div>
 
-<div class="cards">
-  <div class="card">
-    <img src="shoes brand.png" alt="Shoes" style="width:100%;height:200px;object-fit:cover;border-radius:10px;">
-    <h2 id="p1N" style="color:#FBBF24;margin:10px 0 4px;">Black Brand Shoes</h2>
-    <p id="p1P" style="color:#10B981;font-size:18px;font-weight:bold;margin:4px 0 10px;">Rs. 3,500</p>
-    <div class="sel-row">
-      <select id="c1"><option>Black</option><option>Brown</option><option>Tan</option></select>
-      <select id="s1"><option>7</option><option selected>8</option><option>9</option><option>10</option></select>
-    </div>
-    <div class="sel-row"><input type="number" id="q1" value="1" min="1"></div>
-    <button type="button" class="btn-gold" onclick="addCart(1)">Add to Cart (Multi-Order)</button>
-    <button type="button" class="btn-green" onclick="showCart()">Checkout &amp; WhatsApp</button>
+<div class="grid">
+  <div class="box">
+    <img src="shoes brand.png" alt="Shoes">
+    <h2 id="n1" style="color:#FBBF24;margin:10px 0 4px;">Black Brand Shoes</h2>
+    <p id="p1" style="color:#10B981;font-size:18px;font-weight:bold;margin:4px 0;">Rs. 3,500</p>
+    <select id="col1"><option>Black</option><option>Brown</option><option>Tan</option></select>
+    <select id="siz1"><option>Number 7</option><option selected>Number 8</option><option>Number 9</option><option>Number 10</option></select>
+    <input type="number" id="qty1" value="1" min="1">
+    <button type="button" class="goldBtn" id="add1">Add to Cart (Multi-Order)</button>
+    <button type="button" class="greenBtn" id="chk1">Checkout &amp; WhatsApp</button>
   </div>
 
-  <div class="card">
-    <img src="Dress vip.png" alt="Suit" style="width:100%;height:200px;object-fit:cover;border-radius:10px;">
-    <h2 id="p2N" style="color:#FBBF24;margin:10px 0 4px;">VIP Party Suit</h2>
-    <p id="p2P" style="color:#10B981;font-size:18px;font-weight:bold;margin:4px 0 10px;">Rs. 4,800</p>
-    <div class="sel-row">
-      <select id="c2"><option>Black</option><option>Navy Blue</option><option>White</option></select>
-      <select id="s2"><option>S</option><option>M</option><option selected>L</option><option>XL</option></select>
-    </div>
-    <div class="sel-row"><input type="number" id="q2" value="1" min="1"></div>
-    <button type="button" class="btn-gold" onclick="addCart(2)">Add to Cart (Multi-Order)</button>
-    <button type="button" class="btn-green" onclick="showCart()">Checkout &amp; WhatsApp</button>
+  <div class="box">
+    <img src="Dress vip.png" alt="Suit">
+    <h2 id="n2" style="color:#FBBF24;margin:10px 0 4px;">VIP Party Suit</h2>
+    <p id="p2" style="color:#10B981;font-size:18px;font-weight:bold;margin:4px 0;">Rs. 4,800</p>
+    <select id="col2"><option>Black</option><option>Navy Blue</option><option>White</option></select>
+    <select id="siz2"><option>Size S</option><option>Size M</option><option selected>Size L</option><option>Size XL</option></select>
+    <input type="number" id="qty2" value="1" min="1">
+    <button type="button" class="goldBtn" id="add2">Add to Cart (Multi-Order)</button>
+    <button type="button" class="greenBtn" id="chk2">Checkout &amp; WhatsApp</button>
   </div>
 </div>
 
-<div style="margin-top:40px;padding:20px 10px 85px;border-top:1px solid #374151;color:#9CA3AF;font-size:13px;">
-  <strong style="color:#FBBF24;" id="fTitle">2026 NOMAN VIP STORE</strong><br>
-  Shop Address: Main Bazar, Narowal, Punjab • COD &amp; JazzCash/EasyPaisa<br><br>
+<div style="padding:20px 10px 90px;border-top:1px solid #374151;color:#9CA3AF;font-size:13px;">
+  <strong style="color:#FBBF24;" id="fName">2026 NOMAN VIP STORE</strong><br>
+  Shop Address: Main Bazar, Narowal, Punjab • Delivery: 3-4 Days (COD &amp; JazzCash/EasyPaisa Soon)<br><br>
   <a href="admin.html" style="color:#FBBF24;font-weight:bold;">Owner Admin Panel</a>
 </div>
 
-<div id="cartBox" class="modal">
-  <div class="modal-box">
+<!-- Cart Popup -->
+<div class="popup" id="cartPop">
+  <div class="popupIn">
     <div style="display:flex;justify-content:space-between;">
       <h3 style="color:#FBBF24;margin:0;">Your Order Cart</h3>
-      <span onclick="hideCart()" style="cursor:pointer;color:#FBBF24;font-weight:bold;">X</span>
+      <button type="button" id="closeCartBtn" style="background:none;border:none;color:#FBBF24;font-size:18px;cursor:pointer;">X</button>
     </div>
-    <div id="cList" style="margin:12px 0;font-size:13px;"></div>
-    <h4 style="color:#10B981;">Total: Rs. <span id="cTot">0</span></h4>
-    <input type="text" id="uName" placeholder="Customer Name">
-    <input type="text" id="uPhone" placeholder="Mobile Number">
-    <textarea id="uAddr" rows="2" placeholder="Complete Delivery Address & City"></textarea>
-    <select id="uPay">
+    <div id="cartItems" style="margin:12px 0;font-size:13px;"></div>
+    <h4 style="color:#10B981;">Total Bill: Rs. <span id="cartTot">0</span></h4>
+    <input type="text" id="custN" placeholder="Customer Name">
+    <input type="text" id="custP" placeholder="Mobile Number">
+    <textarea id="custA" rows="2" placeholder="Complete Delivery Address & City"></textarea>
+    <select id="custPay">
       <option>Cash on Delivery (COD)</option>
-      <option>JazzCash / EasyPaisa (Account Soon)</option>
+      <option>JazzCash / EasyPaisa (Number Soon)</option>
     </select>
-    <button type="button" class="btn-green" onclick="sendWA()">Send Order on WhatsApp</button>
+    <button type="button" class="greenBtn" id="sendWaBtn">Send Order on WhatsApp</button>
   </div>
 </div>
 
-<button type="button" onclick="openAI()" style="position:fixed;bottom:20px;left:20px;background:#FBBF24;color:#111827;border:none;border-radius:50px;padding:13px 18px;font-weight:bold;cursor:pointer;z-index:99998;">AI Salesman</button>
+<!-- AI Salesman Button & Box -->
+<button type="button" id="aiToggleBtn" style="position:fixed;bottom:20px;left:20px;background:#FBBF24;color:#111827;border:none;border-radius:50px;padding:13px 18px;font-weight:bold;cursor:pointer;z-index:99998;">AI Salesman</button>
 
-<div id="aiBox" style="display:none;position:fixed;bottom:75px;left:20px;width:300px;background:#1F2937;border:2px solid #FBBF24;border-radius:15px;text-align:left;z-index:99998;overflow:hidden;">
+<div id="aiWin" style="display:none;position:fixed;bottom:75px;left:20px;width:300px;background:#1F2937;border:2px solid #FBBF24;border-radius:15px;text-align:left;z-index:99998;overflow:hidden;">
   <div style="background:#FBBF24;color:#111827;padding:10px;font-weight:bold;display:flex;justify-content:space-between;">
-    <span>AI Salesman</span>
-    <span onclick="openAI()" style="cursor:pointer;">X</span>
+    <span>AI Salesman (24/7)</span>
+    <span id="aiCloseX" style="cursor:pointer;">X</span>
   </div>
-  <div id="msgs" style="height:210px;overflow-y:auto;padding:10px;font-size:13px;">
-    <div style="background:#374151;padding:8px;border-radius:8px;margin-bottom:8px;">Assalam-o-Alaikum! Kya order karna hai? Neeche <b>Order Book</b> dabayein!</div>
+  <div id="aiLog" style="height:210px;overflow-y:auto;padding:10px;font-size:13px;">
+    <div style="background:#374151;padding:8px;border-radius:8px;margin-bottom:8px;">Assalam-o-Alaikum! Main aapka AI Salesman hoon. Neeche <b>Order Book</b> dabayein ya sawal likhein!</div>
   </div>
   <div style="padding:5px;background:#111827;">
-    <button type="button" onclick="quickBtn('Order book karna hai')" style="background:#FBBF24;color:#111827;border:none;border-radius:10px;padding:4px 10px;font-size:11px;font-weight:bold;cursor:pointer;">Order Book</button>
-    <button type="button" onclick="quickBtn('Shop address?')" style="background:#374151;color:#FBBF24;border:1px solid #FBBF24;border-radius:10px;padding:4px 8px;font-size:11px;cursor:pointer;">Address?</button>
+    <button type="button" id="qOrderBtn" style="background:#FBBF24;color:#111827;border:none;border-radius:10px;padding:4px 10px;font-size:11px;font-weight:bold;cursor:pointer;">Order Book</button>
+    <button type="button" id="qAddrBtn" style="background:#374151;color:#FBBF24;border:1px solid #FBBF24;border-radius:10px;padding:4px 8px;font-size:11px;cursor:pointer;">Shop Address?</button>
   </div>
   <div style="display:flex;background:#111827;border-top:1px solid #374151;">
-    <input type="text" id="txtIn" onkeypress="if(event.key==='Enter')goChat()" placeholder="Yahan likhein..." style="flex:1;padding:8px;background:none;border:none;color:#fff;outline:none;">
-    <button type="button" onclick="goChat()" style="background:#FBBF24;color:#111827;border:none;padding:8px 12px;font-weight:bold;cursor:pointer;">Send</button>
+    <input type="text" id="aiInput" placeholder="Yahan likhein..." style="flex:1;padding:8px;background:none;border:none;color:#fff;outline:none;margin:0;">
+    <button type="button" id="aiSendBtn" style="background:#FBBF24;color:#111827;border:none;padding:8px 12px;font-weight:bold;cursor:pointer;">Send</button>
   </div>
 </div>
 
 <script>
-var cfg = JSON.parse(localStorage.getItem('vipStoreData')) || {
-  storeName: "NOMAN VIP STORE", phone: "923251753556", p1Name: "Black Brand Shoes", p1Price: "3500", p2Name: "VIP Party Suit", p2Price: "4800"
-};
-document.getElementById('sTitle').innerText = cfg.storeName;
-document.getElementById('fTitle').innerText = "2026 " + cfg.storeName;
-document.getElementById('p1N').innerText = cfg.p1Name;
-document.getElementById('p1P').innerText = "Rs. " + cfg.p1Price;
-document.getElementById('p2N').innerText = cfg.p2Name;
-document.getElementById('p2P').innerText = "Rs. " + cfg.p2Price;
+window.onload = function() {
+  var cfg = JSON.parse(localStorage.getItem('vipStoreData')) || {
+    storeName: "NOMAN VIP STORE", phone: "923251753556", p1Name: "Black Brand Shoes", p1Price: "3500", p2Name: "VIP Party Suit", p2Price: "4800"
+  };
+  document.getElementById('bName').innerText = "NV | " + cfg.storeName;
+  document.getElementById('fName').innerText = "2026 " + cfg.storeName;
+  document.getElementById('n1').innerText = cfg.p1Name;
+  document.getElementById('p1').innerText = "Rs. " + cfg.p1Price;
+  document.getElementById('n2').innerText = cfg.p2Name;
+  document.getElementById('p2').innerText = "Rs. " + cfg.p2Price;
 
-var myCart = [];
-function addCart(num) {
-  var name = num === 1 ? cfg.p1Name : cfg.p2Name;
-  var price = num === 1 ? Number(cfg.p1Price) : Number(cfg.p2Price);
-  var col = document.getElementById('c' + num).value;
-  var siz = document.getElementById('s' + num).value;
-  var qty = Number(document.getElementById('q' + num).value) || 1;
-  myCart.push({ name: name, price: price, col: col, siz: siz, qty: qty });
-  document.getElementById('cCount').innerText = myCart.length;
-  alert(qty + "x " + name + " (" + col + ", Size: " + siz + ") Cart mein add ho gaya!");
-}
-
-function showCart() {
-  var html = "";
-  var tot = 0;
-  for (var i = 0; i < myCart.length; i++) {
-    var x = myCart[i];
-    var s = x.price * x.qty;
-    tot += s;
-    html += "<div>" + x.qty + "x " + x.name + " (" + x.col + ", Size: " + x.siz + ") = Rs. " + s + "</div>";
+  var cart = [];
+  function addItem(num) {
+    var name = num === 1 ? cfg.p1Name : cfg.p2Name;
+    var price = num === 1 ? Number(cfg.p1Price) : Number(cfg.p2Price);
+    var col = document.getElementById('col' + num).value;
+    var siz = document.getElementById('siz' + num).value;
+    var qty = Number(document.getElementById('qty' + num).value) || 1;
+    cart.push({ name: name, price: price, col: col, siz: siz, qty: qty });
+    document.getElementById('openCartBtn').innerText = "Cart (" + cart.length + ")";
+    alert(qty + "x " + name + " (" + col + ", " + siz + ") Cart mein add ho gaya!");
   }
-  if (html === "") html = "Cart khali hai. Pehle Add to Cart dabayein!";
-  document.getElementById('cList').innerHTML = html;
-  document.getElementById('cTot').innerText = tot;
-  document.getElementById('cartBox').style.display = "block";
-}
-function hideCart() { document.getElementById('cartBox').style.display = "none"; }
 
-function sendWA() {
-  if (myCart.length === 0) { alert("Pehle Add to Cart dabayein!"); return; }
+  function viewCart() {
+    var html = "";
+    var tot = 0;
+    for (var i = 0; i < cart.length; i++) {
+      var x = cart[i];
+      var sub = x.price * x.qty;
+      tot += sub;
+      html += "<div>• " + x.qty + "x " + x.name + " (" + x.col + ", " + x.siz + ") = Rs. " + sub + "</div>";
+    }
+    document.getElementById('cartItems').innerHTML = html || "Cart khali hai. Pehle Add to Cart dabayein!";
+    document.getElementById('cartTot').innerText = tot;
+    document.getElementById('cartPop').style.display = "block";
+  }
+
+  document.getElementById('add1').onclick = function() { addItem(1); };
+  document.getElementById('add2').onclick = function() { addItem(2); };
+  document.getElementById('chk1').onclick = viewCart;
+  document.getElementById('chk2').onclick = viewCart;
+  document.getElementById('openCartBtn').onclick = viewCart;
+  document.getElementById('closeCartBtn').onclick = function() { document.getElementById('cartPop').style.display = "none"; };
+
+  document.getElementById('sendWaBtn').onclick = function() {
+    if (cart.length === 0) { alert("Pehle Add to Cart dabayein!"); return; }
+    var n = document.getElementById('custN').value;
+    var p = document.getElementById('custP').value;
+    var a = document.getElementById('custA').value;
+    var pay = document.getElementById('custPay').value;
+    if (!n || !p || !a) { alert("Naam, Phone aur Address zaroor likhein!"); return; }
+    var msg = "Order from " + cfg.storeName + ":%0A";
+    var tot = 0;
+    for (var i = 0; i < cart.length; i++) {
+      var x = cart[i];

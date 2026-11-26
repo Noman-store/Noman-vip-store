@@ -3,147 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noman VIP Store</title>
+<title>Owner Admin Panel - Noman VIP Store</title>
 <style>
   * { box-sizing: border-box; }
-  body { background:#111827; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; text-align:center; overflow-x:hidden; }
-  .navbar { background:#0B0F19; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #374151; flex-wrap:wrap; gap:10px; width:100%; }
-  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .logo-badge { background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; font-weight:900; font-size:19px; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 12px rgba(251,191,36,0.5); }
-  .logo-text { color:#FBBF24; font-size:20px; font-weight:bold; letter-spacing:1px; }
-  .nav-links { display:flex; align-items:center; gap:14px; }
-  .nav-links a { color:#D1D5DB; text-decoration:none; font-size:14px; font-weight:bold; }
-  .nav-links a:hover { color:#FBBF24; }
-  .hero { background:linear-gradient(135deg, #1F2937 0%, #0F172A 100%); border-bottom:2px solid #FBBF24; padding:45px 20px; margin-bottom:25px; }
-  .hero-tag { background:rgba(251,191,36,0.15); color:#FBBF24; border:1px solid #FBBF24; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:bold; display:inline-block; margin-bottom:12px; }
-  .hero h1 { color:#fff; font-size:34px; margin:5px 0 10px; }
-  .hero h1 span { color:#FBBF24; }
-  .hero p { color:#9CA3AF; font-size:15px; max-width:520px; margin:0 auto 22px; line-height:1.6; }
-  .hero-btn { background:#FBBF24; color:#111827; text-decoration:none; padding:13px 28px; border-radius:30px; font-weight:bold; font-size:15px; display:inline-block; box-shadow:0 4px 15px rgba(251,191,36,0.3); }
-  .size-link-btn { display:block; background:#FBBF24; color:#111827; text-decoration:none; padding:10px 20px; border-radius:25px; font-weight:bold; margin-bottom:8px; font-size:14px; }
-  .wa-quick-btn { background:#25D366; color:#fff; border:none; padding:10px 20px; border-radius:25px; font-weight:bold; cursor:pointer; width:100%; font-size:14px; }
+  body { background:#111827; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; }
+  .topbar { background:#0B0F19; padding:15px 25px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #FBBF24; flex-wrap:wrap; gap:10px; }
+  .topbar h2 { color:#FBBF24; margin:0; font-size:20px; }
+  .topbar a { color:#111827; background:#FBBF24; padding:8px 15px; border-radius:20px; text-decoration:none; font-weight:bold; font-size:13px; }
+  .container { max-width:1100px; margin:25px auto; padding:0 15px; }
+  .login-box { max-width:380px; margin:80px auto; background:#1F2937; padding:30px; border-radius:15px; border:2px solid #FBBF24; text-align:center; }
+  .login-box input { width:100%; padding:12px; margin:15px 0; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; font-size:15px; }
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:15px; margin-bottom:25px; }
+  .stat-card { background:#1F2937; border:1px solid #374151; border-radius:12px; padding:18px; border-left:4px solid #FBBF24; }
+  .stat-card h4 { margin:0 0 8px; color:#9CA3AF; font-size:13px; }
+  .stat-card .val { font-size:24px; font-weight:bold; color:#10B981; }
+  .stat-card .sub { font-size:12px; color:#FBBF24; margin-top:5px; }
+  .pay-breakdown { background:#1F2937; border:1px solid #374151; border-radius:12px; padding:15px 20px; margin-bottom:25px; display:flex; justify-content:space-around; flex-wrap:wrap; gap:15px; }
+  .pay-item { text-align:center; }
+  .pay-item span { display:block; font-size:12px; color:#9CA3AF; }
+  .pay-item strong { font-size:18px; color:#FBBF24; }
+  .tabs { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .tab-btn { background:#1F2937; color:#fff; border:1px solid #4B5563; padding:10px 18px; border-radius:25px; cursor:pointer; font-weight:bold; }
+  .tab-btn.active { background:#FBBF24; color:#111827; border-color:#FBBF24; }
+  .section { display:none; background:#1F2937; border:1px solid #374151; border-radius:15px; padding:20px; margin-bottom:30px; }
+  .section.active { display:block; }
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:15px; }
+  label { display:block; font-size:12px; color:#D1D5DB; margin-bottom:4px; font-weight:bold; }
+  input, select, textarea { width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; font-size:13px; }
+  .btn-save { background:#10B981; color:#fff; border:none; padding:12px 25px; border-radius:25px; font-weight:bold; cursor:pointer; font-size:15px; width:100%; margin-top:10px; }
+  .btn-gold { background:#FBBF24; color:#111827; border:none; padding:10px 20px; border-radius:20px; font-weight:bold; cursor:pointer; }
+  table { width:100%; border-collapse:collapse; font-size:13px; margin-top:10px; }
+  th, td { padding:12px 10px; border-bottom:1px solid #374151; text-align:left; }
+  th { background:#0B0F19; color:#FBBF24; }
+  .status-sel { padding:6px; border-radius:6px; background:#111827; color:#10B981; border:1px solid #10B981; font-weight:bold; }
 </style>
 </head>
 <body>
 
-<div class="navbar">
-  <a href="index.html" class="logo">
-    <div class="logo-badge">NV</div>
-    <span class="logo-text" id="dispStoreName">NOMAN VIP STORE</span>
-  </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="products.html" style="color:#FBBF24; border:1px solid #FBBF24; padding:6px 12px; border-radius:15px;">Select Sizes</a>
-  </div>
+<div class="topbar">
+  <h2>🔐 NOMAN VIP STORE - LIVE CLOUD ADMIN</h2>
+  <a href="index.html">🌐 View Live Store</a>
 </div>
 
-<div class="hero">
-  <div class="hero-tag">NEW 2026 VIP COLLECTION</div>
-  <h1>Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
-  <p>Shandar quality, behtareen silai aur pure Pakistan mein Cash on Delivery (COD) ki sahulat. Apna size chunein aur abhi order karein!</p>
-  <a href="products.html" class="hero-btn">Select Size &amp; Place Order</a>
+<div id="loginScreen" class="login-box">
+  <h3 style="color:#FBBF24;margin-top:0;">Owner Security Lock</h3>
+  <p style="font-size:13px;color:#9CA3AF;">Admin Panel kholne ke liye password daalein:</p>
+  <input type="password" id="adminPassInput" placeholder="Password (Default: noman123)" onkeypress="if(event.key==='Enter') checkLogin()">
+  <button class="btn-gold" style="width:100%;padding:12px;" onclick="checkLogin()">🔓 Unlock Dashboard</button>
 </div>
 
-<div style="padding:0 20px;">
-  <div style="margin:10px auto 25px;max-width:400px;">
-    <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search shoes, suits..."
-     style="width:100%;padding:12px 18px;border-radius:25px;border:2px solid #FBBF24;background:#1F2937;color:#fff;outline:none;">
-  </div>
-
-  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:22px;">
-    
-    <div class="product-card" style="background:#1F2937;border:1px solid #374151;border-radius:15px;width:270px;padding:15px;">
-      <img src="shoes brand.png" alt="Black Brand Shoes" style="width:100%;height:210px;object-fit:cover;border-radius:10px;">
-      <h2 id="dispP1Name" style="color:#FBBF24;font-size:21px;margin:10px 0 5px;">Black Brand Shoes</h2>
-      <p style="color:#9CA3AF;font-size:12px;margin:0 0 6px;">Available Numbers: 7, 8, 9, 10</p>
-      <p id="dispP1Price" style="color:#10B981;font-size:19px;font-weight:bold;margin:5px 0 14px;">Rs. 3,500</p>
-      <a href="products.html" class="size-link-btn">Select Number &amp; Address</a>
-      <button type="button" onclick="orderWA(storeCfg.p1Name + ' Rs ' + storeCfg.p1Price)" class="wa-quick-btn">Quick WhatsApp Order</button>
+<div id="adminDashboard" class="container" style="display:none;">
+  <h3 style="color:#FBBF24;margin-bottom:12px;">📊 Live Kamai aur Profit Report</h3>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h4>📅 Aaj Ki Kamai (Today)</h4>
+      <div class="val">Rs. <span id="todaySale">0</span></div>
+      <div class="sub">Pure Profit: Rs. <span id="todayProfit">0</span></div>
     </div>
-
-    <div class="product-card" style="background:#1F2937;border:1px solid #374151;border-radius:15px;width:270px;padding:15px;">
-      <img src="Dress vip.png" alt="VIP Party Suit" style="width:100%;height:210px;object-fit:cover;border-radius:10px;">
-      <h2 id="dispP2Name" style="color:#FBBF24;font-size:21px;margin:10px 0 5px;">VIP Party Suit</h2>
-      <p style="color:#9CA3AF;font-size:12px;margin:0 0 6px;">Available Sizes: S, M, L, XL</p>
-      <p id="dispP2Price" style="color:#10B981;font-size:19px;font-weight:bold;margin:5px 0 14px;">Rs. 4,800</p>
-      <a href="products.html" class="size-link-btn">Select Size &amp; Address</a>
-      <button type="button" onclick="orderWA(storeCfg.p2Name + ' Rs ' + storeCfg.p2Price)" class="wa-quick-btn">Quick WhatsApp Order</button>
+    <div class="stat-card">
+      <h4>🗓️ Is Mahine Ki Kamai (Month)</h4>
+      <div class="val">Rs. <span id="monthSale">0</span></div>
+      <div class="sub">Pure Profit: Rs. <span id="monthProfit">0</span></div>
     </div>
-
+    <div class="stat-card">
+      <h4>🏆 Poore Saal Ki Kamai (Year)</h4>
+      <div class="val">Rs. <span id="yearSale">0</span></div>
+      <div class="sub">Pure Profit: Rs. <span id="yearProfit">0</span></div>
+    </div>
+    <div class="stat-card">
+      <h4>📦 Total Orders</h4>
+      <div class="val"><span id="totalOrdersCount">0</span> Orders</div>
+      <div class="sub">Live Synced with Cloud</div>
+    </div>
   </div>
 
-  <div style="margin-top:45px;padding:20px 10px 80px;border-top:1px solid #374151;color:#9CA3AF;font-size:13px;line-height:1.8;">
-    <strong style="color:#FBBF24;" id="footerStoreName">2026 NOMAN VIP STORE</strong><br>
-    Pure Pakistan mein Cash on Delivery (COD) • 7 Days Easy Exchange<br>
-    <a href="admin.html" style="color:#6B7280; text-decoration:underline; font-size:12px;">🔐 Owner Admin Panel</a>
+  <div class="pay-breakdown">
+    <div class="pay-item"><span>📱 JazzCash Se Aaya</span><strong>Rs. <span id="jazzTotal">0</span></strong></div>
+    <div class="pay-item"><span>💚 EasyPaisa Se Aaya</span><strong>Rs. <span id="easyTotal">0</span></strong></div>
+    <div class="pay-item"><span>🏦 Bank Transfer Se Aaya</span><strong>Rs. <span id="bankTotal">0</span></strong></div>
   </div>
-</div>
 
-<button type="button" onclick="toggleChat()"
- style="position:fixed;bottom:20px;left:20px;background:#FBBF24;color:#111827;border:none;border-radius:50px;padding:13px 18px;font-weight:bold;cursor:pointer;z-index:99999;box-shadow:0 4px 12px rgba(0,0,0,0.4);">
-Voice AI Assistant</button>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('ordersTab', this)">📦 Live Orders &amp; Tracking</button>
+    <button class="tab-btn" onclick="showTab('productsTab', this)">👟 Edit Products &amp; 4-Angles</button>
+    <button class="tab-btn" onclick="showTab('storeTab', this)">🏪 Store Logo, Address &amp; Pass</button>
+  </div>
 
-<div id="aiChatBox" style="display:none;position:fixed;bottom:78px;left:20px;width:300px;background:#1F2937;border:2px solid #FBBF24;border-radius:15px;overflow:hidden;text-align:left;z-index:99999;">
-<div style="background:#FBBF24;color:#111827;padding:10px 14px;font-weight:bold;display:flex;justify-content:space-between;">
-<span>Store Voice AI</span>
-<div><span id="vBtn" onclick="toggleVoice()" style="cursor:pointer;margin-right:10px;">🔊</span>
-<span onclick="toggleChat()" style="cursor:pointer;">✖</span></div>
-</div>
-<div id="chatMsgs" style="height:210px;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;font-size:13px;">
-<div style="background:#374151;padding:9px;border-radius:10px;">Assalam-o-Alaikum! Main is store ka Voice AI hoon. Likh kar ya mic daba kar poochein!</div>
-</div>
-<div style="padding:5px 8px;background:#111827;display:flex;gap:4px;">
-<button type="button" onclick="qAsk('Suit price?')" style="background:#374151;color:#FBBF24;border:1px solid #FBBF24;border-radius:10px;padding:3px 7px;font-size:11px;cursor:pointer;">Suit?</button>
-<button type="button" onclick="qAsk('Shoes price?')" style="background:#374151;color:#FBBF24;border:1px solid #FBBF24;border-radius:10px;padding:3px 7px;font-size:11px;cursor:pointer;">Shoes?</button>
-<button type="button" onclick="qAsk('Delivery and COD?')" style="background:#374151;color:#FBBF24;border:1px solid #FBBF24;border-radius:10px;padding:3px 7px;font-size:11px;cursor:pointer;">Delivery?</button>
-</div>
-<div style="display:flex;border-top:1px solid #374151;background:#111827;">
-<button type="button" id="micBtn" onclick="startMic()" style="background:none;border:none;color:#FBBF24;font-size:17px;padding:0 8px;cursor:pointer;">🎤</button>
-<input type="text" id="uInp" onkeypress="if(event.key==='Enter')sendMsg()" placeholder="Sawal likhein ya mic dabayein..."
- style="flex:1;padding:9px 4px;border:none;background:none;color:#fff;outline:none;">
-<button type="button" onclick="sendMsg()" style="background:#FBBF24;color:#111827;border:none;padding:9px 12px;font-weight:bold;cursor:pointer;">Send</button>
-</div>
+  <div id="ordersTab" class="section active">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <h3 style="color:#FBBF24;margin:0;">Customer Orders &amp; Live Tracking</h3>
+      <button class="btn-gold" onclick="renderOrdersAndProfit()">🔄 Refresh Orders</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tracking ID</th>
+            <th>Date</th>
+            <th>Customer &amp; Address</th>
+            <th>Items</th>
+            <th>Bill &amp; Payment</th>
+            <th>Tracking Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="productsTab" class="section">
+    <h3 style="color:#FBBF24;margin-top:0;">Products, Prices, Profit Cost &amp; 4-Angle Photos</h3>
+    <div class="form-grid">
+      <div style="background:#111827;padding:15px;border-radius:10px;border:1px solid #374151;">
+        <h4 style="color:#FBBF24;margin-top:0;">Product 1 (Shoes)</h4>
+        <label>Product Name:</label><input type="text" id="editP1Name">
+        <label>Sale Price (Rs.):</label><input type="number" id="editP1Price">
+        <label>Khareed Qeemat (Cost Rs.):</label><input type="number" id="editP1Cost">
+        <label>Khobiyan:</label><textarea id="editP1Specs" rows="2"></textarea>
+        <label>4-Angle Photos (File name ya Link):</label>
+        <input type="text" id="editP1Img1"><input type="text" id="editP1Img2"><input type="text" id="editP1Img3"><input type="text" id="editP1Img4">
+      </div>
+      <div style="background:#111827;padding:15px;border-radius:10px;border:1px solid #374151;">
+        <h4 style="color:#FBBF24;margin-top:0;">Product 2 (Suit)</h4>
+        <label>Product Name:</label><input type="text" id="editP2Name">
+        <label>Sale Price (Rs.):</label><input type="number" id="editP2Price">
+        <label>Khareed Qeemat (Cost Rs.):</label><input type="number" id="editP2Cost">
+        <label>Khobiyan:</label><textarea id="editP2Specs" rows="2"></textarea>
+        <label>4-Angle Photos (File name ya Link):</label>
+        <input type="text" id="editP2Img1"><input type="text" id="editP2Img2"><input type="text" id="editP2Img3"><input type="text" id="editP2Img4">
+      </div>
+    </div>
+    <button class="btn-save" onclick="saveStoreSettings()">💾 Save All Product Changes to Live Store</button>
+  </div>
+
+  <div id="storeTab" class="section">
+    <h3 style="color:#FBBF24;margin-top:0;">Store Branding, Address &amp; Password</h3>
+    <div class="form-grid">
+      <div>
+        <label>Store Name:</label><input type="text" id="editStoreName">
+        <label>Logo Short Text:</label><input type="text" id="editLogoBadge" maxlength="4">
+        <label>Shop Address:</label><input type="text" id="editShopAddr">
+      </div>
+      <div>
+        <label>Owner WhatsApp Number (923...):</label><input type="text" id="editOwnerWa">
+        <label>Admin Panel Password:</label><input type="text" id="editAdminPass">
+      </div>
+    </div>
+    <button class="btn-save" onclick="saveStoreSettings()">💾 Save Store Settings to Cloud</button>
+  </div>
 </div>
 
 <script>
-// Load Dynamic Admin Settings
-var defaultCfg = { storeName: "NOMAN VIP STORE", phone: "923251753556", p1Name: "Black Brand Shoes", p1Price: "3500", p2Name: "VIP Party Suit", p2Price: "4800" };
-var storeCfg = JSON.parse(localStorage.getItem('vipStoreData')) || defaultCfg;
+const DB_URL = "https://firebaseio.com";
 
-document.getElementById('dispStoreName').innerText = storeCfg.storeName;
-document.getElementById('footerStoreName').innerText = "2026 " + storeCfg.storeName;
-document.getElementById('dispP1Name').innerText = storeCfg.p1Name;
-document.getElementById('dispP1Price').innerText = "Rs. " + Number(storeCfg.p1Price).toLocaleString();
-document.getElementById('dispP2Name').innerText = storeCfg.p2Name;
-document.getElementById('dispP2Price').innerText = "Rs. " + Number(storeCfg.p2Price).toLocaleString();
+let storeCfg = {
+  adminPass: "noman123", storeName: "NOMAN VIP STORE", logoBadge: "NV",
+  shopAddr: "Main Bazar, Narowal, Punjab, Pakistan", ownerWa: "923251753556",
+  p1Name: "Black Brand Shoes", p1Price: 3500, p1Cost: 2200,
+  p1Imgs: ["shoes brand.png", "shoes brand.png", "shoes brand.png", "shoes brand.png"],
+  p1Specs: "Pure Leather Finish • Comfort Sole • 3-4 Days Delivery",
+  p2Name: "VIP Party Suit", p2Price: 4800, p2Cost: 3100,
+  p2Imgs: ["Dress vip.png", "Dress vip.png", "Dress vip.png", "Dress vip.png"],
+  p2Specs: "Premium Wash & Wear • Fine Stitching • 3-4 Days Delivery"
+};
 
-var vOn=true;
-function orderWA(it){
-window.open("https://wa.me" + storeCfg.phone + "?text=" + encodeURIComponent("Assalam-o-Alaikum! Mujhe "+it+" order karna hai."),"_blank");
+async function initCloudCfg() {
+  try {
+    let r = await fetch(`${DB_URL}/storeCfg.json`);
+    let d = await r.json();
+    if (d) storeCfg = { ...storeCfg, ...d };
+  } catch (e) {}
 }
-function searchProducts(){
-var q=document.getElementById('searchInput').value.toLowerCase();
-document.querySelectorAll('.product-card').forEach(function(c){
-c.style.display=c.querySelector('h2').innerText.toLowerCase().indexOf(q)>-1?"block":"none";
-});
-}
-function toggleChat(){
-var b=document.getElementById('aiChatBox');
-if(b.style.display==='none'||b.style.display===''){
-b.style.display='block';
-speak("Assalam o Alaikum! " + storeCfg.storeName + " mein khush aamdeed.");
-}else{b.style.display='none';if('speechSynthesis'in window)window.speechSynthesis.cancel();}
-}
-function toggleVoice(){
-vOn=!vOn;document.getElementById('vBtn').innerText=vOn?'🔊':'🔇';
-if(!vOn&&'speechSynthesis'in window)window.speechSynthesis.cancel();
-}
-function speak(t){
-if(!vOn||!('speechSynthesis'in window))return;
-window.speechSynthesis.cancel();
-var s=new SpeechSynthesisUtterance(t.replace(/<[^>]*>/g,' ').replace(/Rs\./g,'Rupees'));
-s.lang='en-IN';window.speechSynthesis.speak(s);
-}
-function startMic(){
-var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(!SR){alert("Mic support nahi hai, type karein.");return;}
+initCloudCfg();
+
+async function checkLogin() {
+  await initCloudCfg();
+  let pass = document.getElementById('adminPassInput').value;

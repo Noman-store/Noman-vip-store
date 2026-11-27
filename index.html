@@ -35,12 +35,17 @@
   .btn-wa { background:#25D366; color:#fff; border:none; padding:10px; border-radius:20px; font-weight:bold; cursor:pointer; width:100%; margin-top:6px; }
   .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; overflow-y:auto; padding:15px; }
   .modal-box { background:#1F2937; border:2px solid #FBBF24; border-radius:14px; max-width:450px; margin:20px auto; padding:18px; text-align:left; }
-  .wa-float { position:fixed; bottom:18px; left:18px; background:#25D366; color:#fff; border:none; padding:12px 18px; border-radius:25px; font-weight:bold; cursor:pointer; z-index:8000; box-shadow:0 4px 12px rgba(0,0,0,0.6); text-decoration:none; font-size:13px; }
-  .ai-btn { position:fixed; bottom:18px; right:18px; background:#FBBF24; color:#111827; border:none; padding:12px 18px; border-radius:25px; font-weight:bold; cursor:pointer; z-index:8000; box-shadow:0 4px 12px rgba(0,0,0,0.6); }
-  .ai-box { display:none; position:fixed; bottom:70px; right:18px; width:340px; max-width:90vw; background:#1F2937; border:2px solid #FBBF24; border-radius:14px; z-index:9999; text-align:left; overflow:hidden; }
+
+  /* Dono Konon Par 2 VIP AI Buttons */
+  .ai-left-btn { position:fixed; bottom:18px; left:18px; background:linear-gradient(135deg, #10B981, #059669); color:#fff; border:2px solid #FBBF24; padding:12px 18px; border-radius:30px; font-weight:bold; cursor:pointer; z-index:8500; box-shadow:0 4px 15px rgba(0,0,0,0.7); font-size:13px; }
+  .ai-right-btn { position:fixed; bottom:18px; right:18px; background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; border:2px solid #fff; padding:12px 18px; border-radius:30px; font-weight:bold; cursor:pointer; z-index:8500; box-shadow:0 4px 15px rgba(251,191,36,0.5); font-size:13px; }
+  
+  .ai-box { display:none; position:fixed; bottom:75px; right:18px; width:345px; max-width:92vw; background:#1F2937; border:2px solid #FBBF24; border-radius:14px; z-index:9999; text-align:left; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.85); }
+  .ai-box.left-mode { right:auto; left:18px; }
   .ai-msgs { height:250px; overflow-y:auto; padding:10px; font-size:12px; display:flex; flex-direction:column; gap:7px; }
-  .m-ai { background:#111827; padding:8px; border-radius:8px; border-left:3px solid #FBBF24; }
+  .m-ai { background:#111827; padding:8px; border-radius:8px; border-left:3px solid #FBBF24; line-height:1.4; }
   .m-usr { background:#FBBF24; color:#111827; padding:7px 10px; border-radius:8px; align-self:flex-end; font-weight:bold; }
+  .mic-btn { background:#EF4444; color:#fff; border:none; border-radius:50%; width:36px; height:36px; cursor:pointer; font-size:15px; flex-shrink:0; }
 </style>
 </head>
 <body>
@@ -61,20 +66,19 @@
 
 <div class="hero" id="heroSec">
   <h1>Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
-  <p style="color:#9CA3AF;font-size:13px;">Side par <b>4 Angles</b> par click karke har side dekhein, ya seedha <b>WhatsApp / AI Salesman</b> se order karein!</p>
+  <p style="color:#9CA3AF;font-size:13px;">Side par <b>4 Angles</b> par click karke har side dekhein, ya neeche <b>AI Assistant</b> se bol kar order karein!</p>
 </div>
 
 <div id="shopSec">
+  <!-- Aam Search Bar -->
   <div style="max-width:400px;margin:0 auto 15px;padding:0 15px;">
     <input type="text" id="sInp" onkeyup="searchP()" placeholder="🔍 Search shoes, suits, color, price..." style="border:2px solid #FBBF24;border-radius:20px;padding:10px 15px;">
   </div>
 
-  <!-- SHOES CARD (Main Full Pic + Side 4 Angles) -->
+  <!-- SHOES CARD -->
   <div class="product-card" data-cat="shoes" data-name="VIP Patent Leather Loafers Black Brown 4500">
     <div class="gallery-box">
-      <div class="main-pic">
-        <img id="main_p1" src="shoes-brand.png" alt="Shoes">
-      </div>
+      <div class="main-pic"><img id="main_p1" src="shoes-brand.png" alt="Shoes"></div>
       <div class="side-angles">
         <div class="ang-thumb active" onclick="viewSide('main_p1', this, 'full')"><img src="shoes-brand.png" style="width:100%;height:100%;object-fit:contain;"></div>
         <div class="ang-thumb" onclick="viewSide('main_p1', this, 'top right')"><img src="shoes-brand.png" style="object-position:top right;"></div>
@@ -94,12 +98,10 @@
     <button class="btn-wa" onclick="waQuick('VIP Patent Leather Loafers',4500,'sz1','cl1','qt1')">💬 Direct WhatsApp Order</button>
   </div>
 
-  <!-- SUIT CARD (Main Full Pic + Side 4 Angles) -->
+  <!-- SUIT CARD -->
   <div class="product-card" data-cat="suits" data-name="Royal 3-Piece Tuxedo Suit Black Navy 8500">
     <div class="gallery-box">
-      <div class="main-pic">
-        <img id="main_p2" src="dress-vip.png" alt="Suit">
-      </div>
+      <div class="main-pic"><img id="main_p2" src="dress-vip.png" alt="Suit"></div>
       <div class="side-angles">
         <div class="ang-thumb active" onclick="viewSide('main_p2', this, 'full')"><img src="dress-vip.png" style="width:100%;height:100%;object-fit:contain;"></div>
         <div class="ang-thumb" onclick="viewSide('main_p2', this, 'top right')"><img src="dress-vip.png" style="object-position:top right;"></div>
@@ -125,8 +127,3 @@
   <p><b>Address:</b> Main Bazar, Narowal, Punjab, Pakistan</p>
   <p><b>WhatsApp:</b> +92 325 1753556</p>
   <p><b>JazzCash / EasyPaisa:</b> 0325-1753556 (Muhammad Noman)</p>
-  <button class="btn-wa" onclick="window.open('https://wa.me')">💬 WhatsApp Rabta</button>
-</div>
-
-<div style="margin-top:40px;padding:15px 10px 90px;border-top:1px solid #374151;color:#9CA3AF;font-size:12px;">
-  <strong style="color:#FBBF24;">2026 NOMAN VIP STORE</strong> • Narowal, Pakistan<br>

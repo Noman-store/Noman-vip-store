@@ -1,182 +1,141 @@
- <button type="button" class="add-cart-btn" onclick="addToCart('VIP Patent Leather Loafers', 4500, 'size_p1', 'color_p1', 'qty_p1')">🛒 Add to Cart (1-20)</button>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noman VIP Store</title>
+<style>
+  * { box-sizing:border-box; }
+  body { background:#111827; color:#fff; font-family:Arial,sans-serif; margin:0; text-align:center; }
+  .navbar { background:#0B0F19; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #FBBF24; flex-wrap:wrap; gap:8px; position:sticky; top:0; z-index:900; }
+  .logo { display:flex; align-items:center; gap:8px; cursor:pointer; }
+  .logo-badge { background:#FBBF24; color:#111827; font-weight:900; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .logo-text { color:#FBBF24; font-size:19px; font-weight:bold; }
+  .nav-btn { color:#D1D5DB; font-size:13px; font-weight:bold; background:none; border:none; cursor:pointer; padding:6px 11px; border-radius:15px; }
+  .nav-btn:hover, .nav-btn.active { background:#1F2937; color:#FBBF24; }
+  .cart-btn { background:#FBBF24; color:#111827; }
+  .hero { background:#0F172A; border-bottom:2px solid #FBBF24; padding:25px 15px; margin-bottom:20px; }
+  .hero h1 { margin:0 0 8px; font-size:26px; }
+  .hero span { color:#FBBF24; }
+  .product-card { background:#1F2937; border:1px solid #374151; border-radius:14px; width:290px; padding:14px; display:inline-block; vertical-align:top; margin:10px; }
+  .product-card:hover { border-color:#FBBF24; }
+  .img-wrap { position:relative; cursor:pointer; }
+  .img-wrap img { width:100%; height:210px; object-fit:cover; border-radius:10px; }
+  .badge { position:absolute; bottom:8px; right:8px; background:#0B0F19; color:#FBBF24; font-size:11px; padding:4px 8px; border-radius:10px; border:1px solid #FBBF24; }
+  .sel-row { display:flex; gap:6px; margin:8px 0; }
+  select, input, textarea { width:100%; padding:8px; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; font-size:12px; }
+  .btn-gold { background:#FBBF24; color:#111827; border:none; padding:10px; border-radius:20px; font-weight:bold; cursor:pointer; width:100%; margin-top:5px; }
+  .btn-wa { background:#25D366; color:#fff; border:none; padding:10px; border-radius:20px; font-weight:bold; cursor:pointer; width:100%; margin-top:6px; }
+  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; overflow-y:auto; padding:15px; }
+  .modal-box { background:#1F2937; border:2px solid #FBBF24; border-radius:14px; max-width:450px; margin:20px auto; padding:18px; text-align:left; }
+  .main-img { width:100%; height:250px; object-fit:contain; background:#0B0F19; border-radius:8px; }
+  .thumbs { display:flex; gap:8px; justify-content:center; margin:10px 0; }
+  .thumbs img { width:60px; height:60px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; }
+  .thumbs img.active { border-color:#FBBF24; }
+  .ai-btn { position:fixed; bottom:18px; right:18px; background:#FBBF24; color:#111827; border:none; padding:12px 18px; border-radius:25px; font-weight:bold; cursor:pointer; z-index:8000; box-shadow:0 4px 12px rgba(0,0,0,0.6); }
+  .ai-box { display:none; position:fixed; bottom:70px; right:18px; width:340px; max-width:90vw; background:#1F2937; border:2px solid #FBBF24; border-radius:14px; z-index:9999; text-align:left; overflow:hidden; }
+  .ai-msgs { height:250px; overflow-y:auto; padding:10px; font-size:12px; display:flex; flex-direction:column; gap:7px; }
+  .m-ai { background:#111827; padding:8px; border-radius:8px; border-left:3px solid #FBBF24; }
+  .m-usr { background:#FBBF24; color:#111827; padding:7px 10px; border-radius:8px; align-self:flex-end; font-weight:bold; }
+</style>
+</head>
+<body>
 
-    <!-- SUIT CARD -->
-    <div class="product-card" data-cat="suits" data-name="Royal 3-Piece Tuxedo Suit Black Navy Blue 8500">
-      <div class="img-wrap" onclick="openGallery('Royal 3-Piece Tuxedo Suit', 8500, 'S, M, L, XL', 'Charcoal Black, Navy Blue, Royal Grey', 'VIP Turkish Wool-Blend Fabric, Fine Tailoring (VIP No.1)', 'Dress vip.png')">
-        <span class="vip-tag">★ VIP No.1 Quality</span>
-        <img src="Dress vip.png" alt="Royal Suit">
-        <span class="angle-badge">🔄 Click for 4 Angles</span>
-      </div>
-      <h3 style="color:#FBBF24;margin:12px 0 4px;font-size:17px;">Royal 3-Piece Tuxedo Suit</h3>
-      <div style="color:#10B981;font-size:18px;font-weight:bold;margin-bottom:6px;">Rs. 8,500</div>
-      <div style="font-size:11px;color:#9CA3AF;margin-bottom:8px;">VIP Turkish Wool-Blend Fabric, Wrinkle-Free No.1</div>
-      <div class="sel-row">
-        <select id="size_p2">
-          <option value="S">Size: S</option>
-          <option value="M" selected>Size: M</option>
-          <option value="L">Size: L</option>
-          <option value="XL">Size: XL</option>
-        </select>
-        <select id="color_p2">
-          <option value="Charcoal Black">Charcoal Black</option>
-          <option value="Navy Blue">Navy Blue</option>
-          <option value="Royal Grey">Royal Grey</option>
-        </select>
-      </div>
-      <div class="sel-row">
-        <select id="qty_p2">
-          <option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="3">Qty: 3</option>
-          <option value="4">Qty: 4</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option>
-          <option value="15">Qty: 15</option><option value="20">Qty: 20</option>
-        </select>
-      </div>
-      <button type="button" class="add-cart-btn" onclick="addToCart('Royal 3-Piece Tuxedo Suit', 8500, 'size_p2', 'color_p2', 'qty_p2')">🛒 Add to Cart (1-20)</button>
-    </div>
-
+<div class="navbar">
+  <div class="logo" onclick="filterCat('all', document.querySelector('.nav-btn'))">
+    <div class="logo-badge">NV</div><span class="logo-text">NOMAN VIP STORE</span>
+  </div>
+  <div>
+    <button class="nav-btn active" onclick="filterCat('all', this)">🏠 Home</button>
+    <button class="nav-btn" onclick="filterCat('shoes', this)">👞 Shoes</button>
+    <button class="nav-btn" onclick="filterCat('suits', this)">👔 Suits</button>
+    <button class="nav-btn" onclick="filterCat('contact', this)">📍 Contact</button>
+    <button class="nav-btn" onclick="openM('trackModal')">📦 Track</button>
+    <button class="nav-btn cart-btn" onclick="openCart()">🛒 Cart (<span id="cCount">0</span>)</button>
   </div>
 </div>
 
-<!-- CONTACT SECTION -->
-<div id="contactSection" style="display:none;padding:0 20px;">
-  <div class="contact-box">
-    <h2 style="color:#FBBF24;margin-top:0;">📍 Hamari Shop &amp; Accounts Detail</h2>
-    <p><b>Store Name:</b> NOMAN VIP STORE</p>
-    <p><b>Shop Address:</b> Main Bazar, Narowal, Punjab, Pakistan</p>
-    <p><b>Owner WhatsApp / Call:</b> +92 325 1753556</p>
-    <p><b>JazzCash / EasyPaisa Account:</b> 0325-1753556 (Muhammad Noman)</p>
-    <p><b>Delivery Time:</b> Pure Pakistan mein 3 se 4 din mein delivery.</p>
-    <button type="button" class="wa-quick-btn" onclick="window.open('https://wa.me Noman VIP Store! Mujhe maloomat chahiye.')">💬 Direct WhatsApp Par Baat Karein</button>
+<div class="hero" id="heroSec">
+  <h1>Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
+  <p style="color:#9CA3AF;font-size:13px;">Tasveer par click karke <b>4 Angles</b> dekhein, ya <b>24/7 AI Salesman</b> se order book karein!</p>
+</div>
+
+<div id="shopSec">
+  <div style="max-width:400px;margin:0 auto 15px;padding:0 15px;">
+    <input type="text" id="sInp" onkeyup="searchP()" placeholder="🔍 Search shoes, suits, color, price..." style="border:2px solid #FBBF24;border-radius:20px;padding:10px 15px;">
+  </div>
+
+  <!-- SHOES -->
+  <div class="product-card" data-cat="shoes" data-name="VIP Patent Leather Loafers Black Brown 4500">
+    <div class="img-wrap" onclick="openGal('VIP Patent Leather Loafers', 4500, '40, 41, 42, 43, 44', 'Jet Black, Dark Brown, Burgundy', 'VIP No.1 Import Pure Leather', 'shoes brand.png')">
+      <img src="shoes brand.png" alt="Shoes"><span class="badge">🔄 4 Angles</span>
+    </div>
+    <h3 style="color:#FBBF24;margin:10px 0 4px;">VIP Patent Leather Loafers</h3>
+    <div style="color:#10B981;font-weight:bold;font-size:18px;">Rs. 4,500</div>
+    <p style="font-size:11px;color:#9CA3AF;">VIP No.1 Import Pure Leather</p>
+    <div class="sel-row">
+      <select id="sz1"><option>40</option><option>41</option><option selected>42</option><option>43</option><option>44</option></select>
+      <select id="cl1"><option>Jet Black</option><option>Dark Brown</option><option>Burgundy</option></select>
+    </div>
+    <select id="qt1"><option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option><option value="20">Qty: 20</option></select>
+    <button class="btn-gold" onclick="addCart('VIP Patent Leather Loafers',4500,'sz1','cl1','qt1')">🛒 Add to Cart</button>
+  </div>
+
+  <!-- SUIT -->
+  <div class="product-card" data-cat="suits" data-name="Royal 3-Piece Tuxedo Suit Black Navy 8500">
+    <div class="img-wrap" onclick="openGal('Royal 3-Piece Tuxedo Suit', 8500, 'S, M, L, XL', 'Charcoal Black, Navy Blue, Grey', 'VIP No.1 Turkish Wool Fabric', 'Dress vip.png')">
+      <img src="Dress vip.png" alt="Suit"><span class="badge">🔄 4 Angles</span>
+    </div>
+    <h3 style="color:#FBBF24;margin:10px 0 4px;">Royal 3-Piece Tuxedo Suit</h3>
+    <div style="color:#10B981;font-weight:bold;font-size:18px;">Rs. 8,500</div>
+    <p style="font-size:11px;color:#9CA3AF;">VIP No.1 Turkish Wool Fabric</p>
+    <div class="sel-row">
+      <select id="sz2"><option>S</option><option selected>M</option><option>L</option><option>XL</option></select>
+      <select id="cl2"><option>Charcoal Black</option><option>Navy Blue</option><option>Royal Grey</option></select>
+    </div>
+    <select id="qt2"><option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option><option value="20">Qty: 20</option></select>
+    <button class="btn-gold" onclick="addCart('Royal 3-Piece Tuxedo Suit',8500,'sz2','cl2','qt2')">🛒 Add to Cart</button>
   </div>
 </div>
 
-<!-- FOOTER -->
-<div style="margin-top:45px;padding:20px 10px 95px;border-top:1px solid #374151;color:#9CA3AF;font-size:13px;">
-  <strong style="color:#FBBF24;">2026 NOMAN VIP STORE</strong><br>
-  📍 Shop Address: Main Bazar, Narowal, Punjab, Pakistan<br>
-  🚚 Pure Pakistan Delivery (3-4 Days) • Advance Payment (JazzCash / EasyPaisa / Bank)<br>
-  <a href="admin.html" style="color:#FBBF24;text-decoration:underline;font-weight:bold;">🔐 Owner Admin Panel</a>
+<div id="contactSec" style="display:none;max-width:500px;margin:20px auto;background:#1F2937;padding:20px;border-radius:14px;border:1px solid #FBBF24;text-align:left;">
+  <h3 style="color:#FBBF24;margin-top:0;">📍 Shop &amp; Accounts</h3>
+  <p><b>Address:</b> Main Bazar, Narowal, Punjab, Pakistan</p>
+  <p><b>WhatsApp:</b> +92 325 1753556</p>
+  <p><b>JazzCash / EasyPaisa:</b> 0325-1753556 (Muhammad Noman)</p>
+  <button class="btn-wa" onclick="window.open('https://wa.me')">💬 WhatsApp Rabta</button>
 </div>
 
-<!-- 4-ANGLE GALLERY MODAL -->
-<div id="galleryModal" class="modal">
-  <div class="modal-content" style="text-align:center;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <h3 id="galTitle" style="color:#FBBF24;margin:0;">Product 4-Angle View</h3>
-      <span onclick="closeModal('galleryModal')" style="cursor:pointer;font-size:22px;color:#FBBF24;font-weight:bold;">✖</span>
-    </div>
-    <img id="galMainImg" class="main-preview" src="" alt="Main View">
-    <div class="thumb-row" id="galThumbs"></div>
-    <p id="galSpecs" style="color:#D1D5DB;font-size:13px;line-height:1.6;margin:10px 0;"></p>
-    <button type="button" class="add-cart-btn" onclick="closeModal('galleryModal')">✔ Close Gallery</button>
+<div style="margin-top:40px;padding:15px 10px 80px;border-top:1px solid #374151;color:#9CA3AF;font-size:12px;">
+  <strong style="color:#FBBF24;">2026 NOMAN VIP STORE</strong> • Narowal, Pakistan<br>
+  <a href="admin.html" style="color:#FBBF24;font-weight:bold;">🔐 Owner Admin Panel</a>
+</div>
+
+<!-- GALLERY MODAL -->
+<div id="galModal" class="modal">
+  <div class="modal-box" style="text-align:center;">
+    <div style="display:flex;justify-content:space-between;"><b id="gTitle" style="color:#FBBF24;"></b><span onclick="closeM('galModal')" style="cursor:pointer;color:#FBBF24;">✖</span></div>
+    <img id="gMain" class="main-img" src="">
+    <div class="thumbs" id="gThumbs"></div>
+    <p id="gSpec" style="font-size:12px;color:#D1D5DB;"></p>
   </div>
 </div>
 
 <!-- CART MODAL -->
 <div id="cartModal" class="modal">
-  <div class="modal-content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <h3 style="color:#FBBF24;margin:0;">🛒 Aapka Mukammal Order</h3>
-      <span onclick="closeModal('cartModal')" style="cursor:pointer;font-size:22px;color:#FBBF24;font-weight:bold;">✖</span>
-    </div>
-    <div id="cartItemsList" style="max-height:200px;overflow-y:auto;margin-bottom:10px;"></div>
-    <div style="background:#111827;padding:10px;border-radius:8px;border:1px solid #FBBF24;margin-bottom:12px;">
-      <strong style="color:#10B981;font-size:16px;">Total Bill: Rs. <span id="cartTotalBill">0</span></strong>
-      <p style="font-size:11px;color:#9CA3AF;margin:4px 0 0;">💳 JazzCash / EasyPaisa: <b>0325-1753556</b> (Muhammad Noman)</p>
-    </div>
-    <label>Customer Ka Poora Naam:</label><input type="text" id="custName" placeholder="Apna naam likhein">
-    <label>WhatsApp / Mobile Number:</label><input type="text" id="custPhone" placeholder="03XXXXXXXXX">
-    <label>Email Address (Optional):</label><input type="email" id="custEmail" placeholder="example@gmail.com">
-    <label>Mukammal Ghar Ka Address &amp; Shehar:</label><textarea id="custAddress" rows="2" placeholder="Ghar number, gali, muhalla, shehar..."></textarea>
-    <label>Payment Method:</label>
-    <select id="custPayment">
-      <option value="JazzCash (0325-1753556)">JazzCash (0325-1753556)</option>
-      <option value="EasyPaisa (0325-1753556)">EasyPaisa (0325-1753556)</option>
-      <option value="Bank Transfer">Bank Transfer</option>
-    </select>
-    <button type="button" class="wa-quick-btn" onclick="submitCartOrder()">✅ Confirm Order &amp; Send to WhatsApp</button>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;"><b style="color:#FBBF24;">🛒 Your Order</b><span onclick="closeM('cartModal')" style="cursor:pointer;color:#FBBF24;">✖</span></div>
+    <div id="cList" style="margin:10px 0;"></div>
+    <p style="color:#10B981;font-weight:bold;">Total: Rs. <span id="cTotal">0</span></p>
+    <p style="font-size:11px;color:#9CA3AF;">💳 JazzCash/EasyPaisa: 0325-1753556 (Muhammad Noman)</p>
+    <input id="uName" placeholder="Poora Naam" style="margin-bottom:6px;">
+    <input id="uPhone" placeholder="Mobile / WhatsApp" style="margin-bottom:6px;">
+    <input id="uEmail" placeholder="Email (Optional)" style="margin-bottom:6px;">
+    <textarea id="uAddr" placeholder="Mukammal Address & City" style="margin-bottom:6px;"></textarea>
+    <button class="btn-wa" onclick="sendOrder()">✅ Confirm &amp; Send to WhatsApp</button>
   </div>
 </div>
 
-<!-- TRACK ORDER MODAL -->
+<!-- TRACK MODAL -->
 <div id="trackModal" class="modal">
-  <div class="modal-content">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <h3 style="color:#FBBF24;margin:0;">📦 Apna Order Track Karein</h3>
-      <span onclick="closeModal('trackModal')" style="cursor:pointer;font-size:22px;color:#FBBF24;font-weight:bold;">✖</span>
-    </div>
-    <label>Apna Tracking ID Daalein (e.g. NV-1001):</label>
-    <input type="text" id="trackInput" placeholder="NV-XXXX">
-    <button type="button" class="add-cart-btn" onclick="checkOrderStatus()">🔍 Check Status</button>
-    <div id="trackResult" style="margin-top:15px;padding:12px;background:#111827;border-radius:10px;display:none;font-size:13px;line-height:1.6;"></div>
-  </div>
-</div>
-
-<!-- 24/7 AI SALESMAN -->
-<button type="button" class="ai-float-btn" onclick="toggleAIChat()">🤖 24/7 AI Salesman (Order Karein)</button>
-<div id="aiChatBox" class="ai-box">
-  <div class="ai-header">
-    <div>
-      <strong style="color:#FBBF24;font-size:14px;">🤖 Noman VIP AI Salesman</strong>
-      <div style="font-size:10px;color:#10B981;">● Online 24/7 (Owner Assistant)</div>
-    </div>
-    <span onclick="toggleAIChat()" style="cursor:pointer;color:#FBBF24;font-weight:bold;font-size:18px;">✖</span>
-  </div>
-  <div class="ai-messages" id="aiMessages">
-    <div class="msg-ai">
-      Assalam-o-Alaikum! Main <b>Noman VIP Store</b> ka 24/7 AI Assistant hoon. Agar owner busy hain ya so rahay hain toh fikar na karein, main aap ka order book kar ke seedha unhein WhatsApp kar doon ga!<br><br>
-      Aap <b>Quality, Colors, Sizes, JazzCash/Account Number</b> pooch sakte hain ya seedha <b>"Order karna hai"</b> likhein!
-    </div>
-  </div>
-  <div class="ai-quick-chips">
-    <span class="chip" onclick="sendQuickChip('Quality aur Colors batao')">✨ Quality &amp; Colors</span>
-    <span class="chip" onclick="sendQuickChip('JazzCash aur Account number do')">💳 Account Number</span>
-    <span class="chip" onclick="sendQuickChip('Mujhe order book karna hai')">🛍️ Order Book Karein</span>
-  </div>
-  <div class="ai-input-area">
-    <input type="text" id="aiUserInput" placeholder="Yahan likhein..." onkeypress="if(event.key==='Enter') handleAISend()">
-    <button type="button" onclick="handleAISend()">Send</button>
-  </div>
-</div>
-
-<script>
-var cart = [];
-var ownerWhatsApp = "923251753556";
-
-function switchPage(cat, btn) {
-  var btns = document.querySelectorAll(".nav-btn");
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove("active");
-  if (btn) btn.classList.add("active");
-
-  if (cat === "contact") {
-    document.getElementById("shopSection").style.display = "none";
-    document.getElementById("heroSection").style.display = "none";
-    document.getElementById("contactSection").style.display = "block";
-  } else {
-    document.getElementById("contactSection").style.display = "none";
-    document.getElementById("heroSection").style.display = "block";
-    document.getElementById("shopSection").style.display = "block";
-    var cards = document.querySelectorAll(".product-card");
-    for (var j = 0; j < cards.length; j++) {
-      if (cat === "all" || cards[j].getAttribute("data-cat") === cat) {
-        cards[j].style.display = "inline-block";
-      } else {
-        cards[j].style.display = "none";
-      }
-    }
-  }
-}
-
-function searchProducts() {
-  var q = document.getElementById("searchInput").value.toLowerCase();
-  var cards = document.querySelectorAll(".product-card");
-  for (var i = 0; i < cards.length; i++) {
-    var txt = cards[i].getAttribute("data-name").toLowerCase();
-    cards[i].style.display = txt.indexOf(q) > -1 ? "inline-block" : "none";
-  }
-}
-
-function openGallery(title, price, sizes, colors, quality, imgSrc) {
-  document.getElementById("galTitle").innerText = title + " (4 Angles)";
-  document.getElementById("galMainImg").src = imgSrc;
-  document.getElementById("galSpecs").innerHTML =
+  <div class="modal-box">

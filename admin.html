@@ -3,126 +3,185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Noman VIP Store</title>
+<title>Owner Admin Panel - Noman VIP Store</title>
 <style>
   * { box-sizing: border-box; }
-  body { background:#111827; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; text-align:center; overflow-x:hidden; }
-  .navbar { background:#0B0F19; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #FBBF24; flex-wrap:wrap; gap:10px; position:sticky; top:0; z-index:9000; }
-  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; cursor:pointer; }
-  .logo-badge { background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; font-weight:900; font-size:19px; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 12px rgba(251,191,36,0.5); }
-  .logo-text { color:#FBBF24; font-size:20px; font-weight:bold; letter-spacing:1px; }
-  .nav-links { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
-  .nav-btn { color:#D1D5DB; font-size:13px; font-weight:bold; background:none; border:none; cursor:pointer; padding:7px 12px; border-radius:18px; transition:0.2s; }
-  .nav-btn:hover, .nav-btn.active { background:#1F2937; color:#FBBF24; }
-  .track-nav-btn { background:#1F2937; color:#FBBF24; border:1px solid #FBBF24; }
-  .cart-nav-btn { background:#FBBF24; color:#111827; }
-
-  .hero { background:linear-gradient(135deg, #1F2937 0%, #0F172A 100%); border-bottom:2px solid #FBBF24; padding:35px 20px; margin-bottom:25px; }
-  .hero-tag { background:rgba(251,191,36,0.15); color:#FBBF24; border:1px solid #FBBF24; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:bold; display:inline-block; margin-bottom:10px; }
-  .hero h1 { color:#fff; font-size:30px; margin:5px 0 10px; }
-  .hero h1 span { color:#FBBF24; }
-  .hero p { color:#9CA3AF; font-size:14px; max-width:540px; margin:0 auto; line-height:1.6; }
-
-  .product-card { background:#1F2937; border:1px solid #374151; border-radius:15px; width:290px; padding:15px; text-align:center; transition:0.3s; }
-  .product-card:hover { border-color:#FBBF24; transform:translateY(-3px); }
-  .img-wrap { position:relative; cursor:pointer; }
-  .img-wrap img { width:100%; height:200px; object-fit:cover; border-radius:10px; background:#0B0F19; }
-  .angle-badge { position:absolute; bottom:8px; right:8px; background:rgba(11,15,25,0.9); color:#FBBF24; font-size:11px; padding:4px 8px; border-radius:12px; border:1px solid #FBBF24; }
-  
-  .sel-row { display:flex; gap:6px; margin:8px 0; }
-  .sel-row select, .sel-row input { flex:1; padding:7px; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; font-size:12px; }
-  .add-cart-btn { background:#FBBF24; color:#111827; border:none; padding:10px; border-radius:25px; font-weight:bold; cursor:pointer; width:100%; font-size:14px; margin-top:6px; }
-  .wa-quick-btn { background:#25D366; color:#fff; border:none; padding:9px; border-radius:25px; font-weight:bold; cursor:pointer; width:100%; font-size:13px; margin-top:6px; }
-
-  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); z-index:100000; overflow-y:auto; padding:20px; }
-  .modal-content { background:#1F2937; border:2px solid #FBBF24; border-radius:15px; max-width:460px; margin:20px auto; padding:20px; text-align:left; }
-  .modal-content label { display:block; font-size:12px; color:#FBBF24; font-weight:bold; margin-top:6px; }
-  .modal-content input, .modal-content select, .modal-content textarea { width:100%; padding:10px; margin:4px 0 10px; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; }
-
-  .main-preview { width:100%; height:260px; object-fit:cover; border-radius:10px; border:1px solid #4B5563; margin-bottom:10px; background:#0B0F19; }
-  .thumb-row { display:flex; gap:8px; justify-content:center; margin-bottom:12px; }
-  .thumb-row img { width:65px; height:65px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid transparent; opacity:0.65; }
-  .thumb-row img.active, .thumb-row img:hover { border-color:#FBBF24; opacity:1; }
-
-  .contact-box { max-width:600px; margin:20px auto; background:#1F2937; border:1px solid #FBBF24; border-radius:15px; padding:25px; text-align:left; line-height:1.8; }
-
-  /* AI Salesman Floating Widget */
-  .ai-float-btn { position:fixed; bottom:20px; left:20px; background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; border:none; padding:12px 18px; border-radius:30px; font-weight:bold; font-size:14px; cursor:pointer; box-shadow:0 4px 15px rgba(251,191,36,0.4); z-index:9999; display:flex; align-items:center; gap:8px; }
-  .ai-box { display:none; position:fixed; bottom:75px; left:20px; width:340px; max-width:92vw; background:#1F2937; border:2px solid #FBBF24; border-radius:15px; z-index:99999; overflow:hidden; text-align:left; box-shadow:0 10px 30px rgba(0,0,0,0.7); }
-  .ai-header { background:#0B0F19; padding:12px 15px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #374151; }
-  .ai-messages { height:270px; overflow-y:auto; padding:12px; font-size:13px; display:flex; flex-direction:column; gap:8px; }
-  .msg-ai { background:#111827; color:#E5E7EB; padding:8px 12px; border-radius:10px; border-left:3px solid #FBBF24; line-height:1.4; }
-  .msg-ai img { width:100%; border-radius:8px; margin-top:6px; max-height:130px; object-fit:cover; }
-  .msg-user { background:#FBBF24; color:#111827; padding:8px 12px; border-radius:10px; align-self:flex-end; font-weight:bold; }
-  .ai-input-area { display:flex; padding:8px; background:#0B0F19; gap:5px; }
-  .ai-input-area input { flex:1; padding:8px; border-radius:20px; border:1px solid #4B5563; background:#111827; color:#fff; outline:none; font-size:12px; }
-  .ai-input-area button { background:#FBBF24; color:#111827; border:none; border-radius:50%; width:34px; height:34px; cursor:pointer; font-weight:bold; }
+  body { background:#111827; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; }
+  .topbar { background:#0B0F19; padding:15px 25px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #FBBF24; flex-wrap:wrap; gap:10px; }
+  .topbar h2 { color:#FBBF24; margin:0; font-size:20px; }
+  .topbar a { color:#111827; background:#FBBF24; padding:8px 15px; border-radius:20px; text-decoration:none; font-weight:bold; font-size:13px; }
+  .container { max-width:1100px; margin:25px auto; padding:0 15px; }
+  .login-box { max-width:380px; margin:80px auto; background:#1F2937; padding:30px; border-radius:15px; border:2px solid #FBBF24; text-align:center; }
+  .login-box input { width:100%; padding:12px; margin:15px 0; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; font-size:15px; }
+  .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:15px; margin-bottom:25px; }
+  .stat-card { background:#1F2937; border:1px solid #374151; border-radius:12px; padding:18px; border-left:4px solid #FBBF24; }
+  .stat-card h4 { margin:0 0 8px; color:#9CA3AF; font-size:13px; }
+  .stat-card .val { font-size:24px; font-weight:bold; color:#10B981; }
+  .stat-card .sub { font-size:12px; color:#FBBF24; margin-top:5px; }
+  .pay-breakdown { background:#1F2937; border:1px solid #374151; border-radius:12px; padding:15px 20px; margin-bottom:25px; display:flex; justify-content:space-around; flex-wrap:wrap; gap:15px; }
+  .pay-item { text-align:center; }
+  .pay-item span { display:block; font-size:12px; color:#9CA3AF; }
+  .pay-item strong { font-size:18px; color:#FBBF24; }
+  .tabs { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+  .tab-btn { background:#1F2937; color:#fff; border:1px solid #4B5563; padding:10px 18px; border-radius:25px; cursor:pointer; font-weight:bold; }
+  .tab-btn.active { background:#FBBF24; color:#111827; border-color:#FBBF24; }
+  .section { display:none; background:#1F2937; border:1px solid #374151; border-radius:15px; padding:20px; margin-bottom:30px; }
+  .section.active { display:block; }
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:15px; }
+  label { display:block; font-size:12px; color:#D1D5DB; margin-bottom:4px; font-weight:bold; }
+  input, select, textarea { width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; font-size:13px; }
+  .btn-save { background:#10B981; color:#fff; border:none; padding:12px 25px; border-radius:25px; font-weight:bold; cursor:pointer; font-size:15px; width:100%; margin-top:10px; }
+  .btn-gold { background:#FBBF24; color:#111827; border:none; padding:10px 20px; border-radius:20px; font-weight:bold; cursor:pointer; }
+  table { width:100%; border-collapse:collapse; font-size:13px; margin-top:10px; }
+  th, td { padding:12px 10px; border-bottom:1px solid #374151; text-align:left; }
+  th { background:#0B0F19; color:#FBBF24; }
+  .status-sel { padding:6px; border-radius:6px; background:#111827; color:#10B981; border:1px solid #10B981; font-weight:bold; }
+  .prod-item-box { background:#111827; padding:15px; border-radius:10px; border:1px solid #374151; position:relative; }
 </style>
 </head>
 <body>
 
-<div class="navbar">
-  <div class="logo" onclick="switchPage('all', this)">
-    <div class="logo-badge" id="dispLogoBadge">NV</div>
-    <span class="logo-text" id="dispStoreName">NOMAN VIP STORE</span>
-  </div>
-  <div class="nav-links">
-    <button type="button" class="nav-btn active" onclick="switchPage('all', this)">🏠 Home</button>
-    <button type="button" class="nav-btn" onclick="switchPage('shoes', this)">👞 Shoes</button>
-    <button type="button" class="nav-btn" onclick="switchPage('suits', this)">👔 Suits</button>
-    <button type="button" class="nav-btn" onclick="switchPage('contact', this)">📍 Shop &amp; Contact</button>
-    <button type="button" class="nav-btn track-nav-btn" onclick="openTrackModal()">📦 Track Order</button>
-    <button type="button" class="nav-btn cart-nav-btn" onclick="openCart()">🛒 My Cart (<span id="cartCount">0</span>)</button>
-  </div>
+<div class="topbar">
+  <h2>🔐 NOMAN VIP STORE - LIVE CLOUD ADMIN</h2>
+  <a href="index.html">🌐 View Live Store</a>
 </div>
 
-<div class="hero" id="heroSection">
-  <div class="hero-tag" id="dispHeroTag">✨ 24/7 AI SALESMAN &amp; MULTI-ORDER STORE</div>
-  <h1 id="dispHeroTitle">Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
-  <p>Tasveer par click karke <b>4 Angles</b> dekhein, ya neeche <b>AI Salesman</b> se bol kar apna order book karwayein!</p>
+<div id="loginScreen" class="login-box">
+  <h3 style="color:#FBBF24;margin-top:0;">Owner Security Lock</h3>
+  <p style="font-size:13px;color:#9CA3AF;">Admin Panel kholne ke liye password daalein:</p>
+  <input type="password" id="adminPassInput" placeholder="Password (Default: noman123)" onkeypress="if(event.key==='Enter') checkLogin()">
+  <button class="btn-gold" style="width:100%;padding:12px;" onclick="checkLogin()">🔓 Unlock Dashboard</button>
 </div>
 
-<div id="shopSection" style="padding:0 20px;">
-  <div style="margin:10px auto 25px;max-width:440px;">
-    <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="🔍 Search shoes, suits, price..."
-     style="width:100%;padding:12px 18px;border-radius:25px;border:2px solid #FBBF24;background:#1F2937;color:#fff;outline:none;">
-  </div>
-
-  <div id="productGrid" style="display:flex;flex-wrap:wrap;justify-content:center;gap:22px;"></div>
-</div>
-
-<div id="contactSection" style="display:none;padding:0 20px;">
-  <div class="contact-box">
-    <h2 style="color:#FBBF24;margin-top:0;">📍 Hamari Shop &amp; Rabta</h2>
-    <p><b>Store Name:</b> <span id="cStoreName">NOMAN VIP STORE</span></p>
-    <p><b>Shop Address:</b> <span id="cShopAddr">Main Bazar, Narowal, Punjab, Pakistan</span></p>
-    <p><b>WhatsApp / Call:</b> <span id="cOwnerWa">+92 325 1753556</span></p>
-    <p><b>Delivery Time:</b> Pure Pakistan mein 3 se 4 din mein delivery.</p>
-    <p><b>Payment Policy:</b> Advance Payment (JazzCash / EasyPaisa / Bank Transfer) ke baad parcel dispatch kiya jata hai.</p>
-    <button type="button" class="wa-quick-btn" onclick="window.open('https://wa.me' + storeCfg.ownerWa, '_blank')">💬 Direct WhatsApp Par Baat Karein</button>
-  </div>
-</div>
-
-<div style="margin-top:45px;padding:20px 10px 95px;border-top:1px solid #374151;color:#9CA3AF;font-size:13px;line-height:1.8;">
-  <strong style="color:#FBBF24;" id="footerStoreName">2026 NOMAN VIP STORE</strong><br>
-  📍 Shop Address: <span id="dispShopAddr">Main Bazar, Narowal, Punjab, Pakistan</span><br>
-  🚚 Pure Pakistan Delivery (3-4 Days) • Advance Payment (JazzCash / EasyPaisa / Bank)<br>
-  <a href="admin.html" style="color:#FBBF24; text-decoration:underline; font-weight:bold;">🔐 Owner Admin Panel</a>
-</div>
-
-<div id="galleryModal" class="modal">
-  <div class="modal-content" style="text-align:center;">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <h3 id="galTitle" style="color:#FBBF24;margin:0;">Product 4-Angle View</h3>
-      <span onclick="closeGallery()" style="cursor:pointer;font-size:22px;color:#FBBF24;">✖</span>
+<div id="adminDashboard" class="container" style="display:none;">
+  <h3 style="color:#FBBF24;margin-bottom:12px;">📊 Live Kamai aur Profit Report</h3>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h4>📅 Aaj Ki Kamai (Today)</h4>
+      <div class="val">Rs. <span id="todaySale">0</span></div>
+      <div class="sub">Pure Profit: Rs. <span id="todayProfit">0</span></div>
     </div>
-    <img id="galMainImg" class="main-preview" src="" alt="Main View">
-    <div class="thumb-row" id="galThumbs"></div>
-    <p id="galSpecs" style="color:#D1D5DB;font-size:13px;line-height:1.5;margin:8px 0;"></p>
-    <button type="button" class="add-cart-btn" onclick="closeGallery()">👍 Close Gallery</button>
+    <div class="stat-card">
+      <h4>🗓️ Is Mahine Ki Kamai (Month)</h4>
+      <div class="val">Rs. <span id="monthSale">0</span></div>
+      <div class="sub">Pure Profit: Rs. <span id="monthProfit">0</span></div>
+    </div>
+    <div class="stat-card">
+      <h4>🏆 Poore Saal Ki Kamai (Year)</h4>
+      <div class="val">Rs. <span id="yearSale">0</span></div>
+      <div class="sub">Pure Profit: Rs. <span id="yearProfit">0</span></div>
+    </div>
+    <div class="stat-card">
+      <h4>📦 Total Orders</h4>
+      <div class="val"><span id="totalOrdersCount">0</span> Orders</div>
+      <div class="sub">Live Synced with Cloud</div>
+    </div>
+  </div>
+
+  <div class="pay-breakdown">
+    <div class="pay-item"><span>📱 JazzCash Se Aaya</span><strong>Rs. <span id="jazzTotal">0</span></strong></div>
+    <div class="pay-item"><span>💚 EasyPaisa Se Aaya</span><strong>Rs. <span id="easyTotal">0</span></strong></div>
+    <div class="pay-item"><span>🏦 Bank Transfer Se Aaya</span><strong>Rs. <span id="bankTotal">0</span></strong></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('ordersTab', this)">📦 Live Orders &amp; Tracking</button>
+    <button class="tab-btn" onclick="showTab('productsTab', this)">👟 Add / Edit / Delete Products</button>
+    <button class="tab-btn" onclick="showTab('storeTab', this)">🏪 Store Logo, Address &amp; Pass</button>
+  </div>
+
+  <div id="ordersTab" class="section active">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+      <h3 style="color:#FBBF24;margin:0;">Customer Orders &amp; Live Tracking</h3>
+      <button class="btn-gold" onclick="renderOrdersAndProfit()">🔄 Refresh Orders</button>
+    </div>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Tracking ID</th>
+            <th>Date</th>
+            <th>Customer &amp; Address</th>
+            <th>Items</th>
+            <th>Bill &amp; Payment</th>
+            <th>Tracking Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="productsTab" class="section">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:15px;">
+      <h3 style="color:#FBBF24;margin:0;">Manage Store Products (4-Angle Photos &amp; Prices)</h3>
+      <button class="btn-gold" onclick="addNewProduct()">➕ Add New Product</button>
+    </div>
+    <div id="adminProductsList" class="form-grid"></div>
+    <button class="btn-save" onclick="saveStoreSettings()">💾 Save All Products to Live Website</button>
+  </div>
+
+  <div id="storeTab" class="section">
+    <h3 style="color:#FBBF24;margin-top:0;">Store Branding, Address &amp; Password</h3>
+    <div class="form-grid">
+      <div>
+        <label>Store Name:</label><input type="text" id="editStoreName">
+        <label>Logo Short Text:</label><input type="text" id="editLogoBadge" maxlength="4">
+        <label>Shop Address:</label><input type="text" id="editShopAddr">
+      </div>
+      <div>
+        <label>Owner WhatsApp Number (923...):</label><input type="text" id="editOwnerWa">
+        <label>Admin Panel Password:</label><input type="text" id="editAdminPass">
+      </div>
+    </div>
+    <button class="btn-save" onclick="saveStoreSettings()">💾 Save Store Settings to Cloud</button>
   </div>
 </div>
 
-<div id="cartModal" class="modal">
-  <div class="modal-content">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
+<script>
+const DB_URL = "https://firebaseio.com";
+
+let storeCfg = {
+  adminPass: "noman123", storeName: "NOMAN VIP STORE", logoBadge: "NV",
+  shopAddr: "Main Bazar, Narowal, Punjab, Pakistan", ownerWa: "923251753556",
+  products: [
+    { id: "p1", category: "shoes", name: "Black Brand Shoes", price: 3500, cost: 2200, imgs: ["shoes brand.png", "shoes brand.png", "shoes brand.png", "shoes brand.png"], specs: "Pure Leather Finish • Comfort Sole • 3-4 Days Delivery", colors: ["Black", "Brown", "Tan"], sizes: ["7", "8", "9", "10"] },
+    { id: "p2", category: "suits", name: "VIP Party Suit", price: 4800, cost: 3100, imgs: ["Dress vip.png", "Dress vip.png", "Dress vip.png", "Dress vip.png"], specs: "Premium Wash & Wear • Fine Stitching • 3-4 Days Delivery", colors: ["Black", "Navy Blue", "White"], sizes: ["S", "M", "L", "XL"] }
+  ]
+};
+
+async function initCloudCfg() {
+  try {
+    let r = await fetch(`${DB_URL}/storeCfg.json`);
+    let d = await r.json();
+    if (d) {
+      storeCfg = { ...storeCfg, ...d };
+      if (!storeCfg.products || !Array.isArray(storeCfg.products)) storeCfg.products = [];
+    }
+  } catch (e) {}
+}
+initCloudCfg();
+
+async function checkLogin() {
+  await initCloudCfg();
+  let pass = document.getElementById('adminPassInput').value;
+  if (pass === storeCfg.adminPass) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminDashboard').style.display = 'block';
+    loadAdminData();
+  } else {
+    alert("❌ Galat Password!");
+  }
+}
+
+function showTab(tabId, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  btn.classList.add('active');
+}
+
+function loadAdminData() {
+  document.getElementById('editStoreName').value = storeCfg.storeName;
+  document.getElementById('editLogoBadge').value = storeCfg.logoBadge;

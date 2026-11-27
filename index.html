@@ -17,7 +17,7 @@
   .hero { background:#0F172A; border-bottom:2px solid #FBBF24; padding:25px 15px; margin-bottom:20px; }
   .hero h1 { margin:0 0 8px; font-size:26px; }
   .hero span { color:#FBBF24; }
-  .product-card { background:#1F2937; border:1px solid #374151; border-radius:14px; width:290px; padding:14px; display:inline-block; vertical-align:top; margin:10px; }
+  .product-card { background:#1F2937; border:1px solid #374151; border-radius:14px; width:295px; padding:14px; display:inline-block; vertical-align:top; margin:10px; }
   .product-card:hover { border-color:#FBBF24; }
   .img-wrap { position:relative; cursor:pointer; }
   .img-wrap img { width:100%; height:210px; object-fit:cover; border-radius:10px; }
@@ -28,10 +28,11 @@
   .btn-wa { background:#25D366; color:#fff; border:none; padding:10px; border-radius:20px; font-weight:bold; cursor:pointer; width:100%; margin-top:6px; }
   .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; overflow-y:auto; padding:15px; }
   .modal-box { background:#1F2937; border:2px solid #FBBF24; border-radius:14px; max-width:450px; margin:20px auto; padding:18px; text-align:left; }
-  .main-img { width:100%; height:250px; object-fit:contain; background:#0B0F19; border-radius:8px; }
+  .main-img { width:100%; height:260px; object-fit:contain; background:#0B0F19; border-radius:8px; }
   .thumbs { display:flex; gap:8px; justify-content:center; margin:10px 0; }
-  .thumbs img { width:60px; height:60px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; }
-  .thumbs img.active { border-color:#FBBF24; }
+  .thumbs img { width:65px; height:65px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; opacity:0.6; }
+  .thumbs img.active { border-color:#FBBF24; opacity:1; }
+  .wa-float { position:fixed; bottom:18px; left:18px; background:#25D366; color:#fff; border:none; padding:12px 18px; border-radius:25px; font-weight:bold; cursor:pointer; z-index:8000; box-shadow:0 4px 12px rgba(0,0,0,0.6); text-decoration:none; font-size:13px; }
   .ai-btn { position:fixed; bottom:18px; right:18px; background:#FBBF24; color:#111827; border:none; padding:12px 18px; border-radius:25px; font-weight:bold; cursor:pointer; z-index:8000; box-shadow:0 4px 12px rgba(0,0,0,0.6); }
   .ai-box { display:none; position:fixed; bottom:70px; right:18px; width:340px; max-width:90vw; background:#1F2937; border:2px solid #FBBF24; border-radius:14px; z-index:9999; text-align:left; overflow:hidden; }
   .ai-msgs { height:250px; overflow-y:auto; padding:10px; font-size:12px; display:flex; flex-direction:column; gap:7px; }
@@ -57,7 +58,7 @@
 
 <div class="hero" id="heroSec">
   <h1>Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
-  <p style="color:#9CA3AF;font-size:13px;">Tasveer par click karke <b>4 Angles</b> dekhein, ya <b>24/7 AI Salesman</b> se order book karein!</p>
+  <p style="color:#9CA3AF;font-size:13px;">Tasveer par click karke <b>4 Angles</b> dekhein, ya seedha <b>WhatsApp / AI Salesman</b> se order karein!</p>
 </div>
 
 <div id="shopSec">
@@ -65,10 +66,10 @@
     <input type="text" id="sInp" onkeyup="searchP()" placeholder="🔍 Search shoes, suits, color, price..." style="border:2px solid #FBBF24;border-radius:20px;padding:10px 15px;">
   </div>
 
-  <!-- SHOES -->
+  <!-- SHOES CARD (4 Angles: shoe1.png, shoe2.png, shoe3.png, shoe4.png) -->
   <div class="product-card" data-cat="shoes" data-name="VIP Patent Leather Loafers Black Brown 4500">
-    <div class="img-wrap" onclick="openGal('VIP Patent Leather Loafers', 4500, '40, 41, 42, 43, 44', 'Jet Black, Dark Brown, Burgundy', 'VIP No.1 Import Pure Leather', 'shoes brand.png')">
-      <img src="shoes brand.png" alt="Shoes"><span class="badge">🔄 4 Angles</span>
+    <div class="img-wrap" onclick="openGal('VIP Patent Leather Loafers', 4500, '40, 41, 42, 43, 44', 'Jet Black, Dark Brown, Burgundy', 'VIP No.1 Import Pure Leather', ['shoes brand.png','shoe2.png','shoe3.png','shoe4.png'])">
+      <img src="shoes brand.png" alt="Shoes"><span class="badge">🔄 Click for 4 Angles</span>
     </div>
     <h3 style="color:#FBBF24;margin:10px 0 4px;">VIP Patent Leather Loafers</h3>
     <div style="color:#10B981;font-weight:bold;font-size:18px;">Rs. 4,500</div>
@@ -79,12 +80,13 @@
     </div>
     <select id="qt1"><option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option><option value="20">Qty: 20</option></select>
     <button class="btn-gold" onclick="addCart('VIP Patent Leather Loafers',4500,'sz1','cl1','qt1')">🛒 Add to Cart</button>
+    <button class="btn-wa" onclick="waQuick('VIP Patent Leather Loafers',4500,'sz1','cl1','qt1')">💬 Direct WhatsApp Order</button>
   </div>
 
-  <!-- SUIT -->
+  <!-- SUIT CARD (4 Angles: Dress vip.png, suit2.png, suit3.png, suit4.png) -->
   <div class="product-card" data-cat="suits" data-name="Royal 3-Piece Tuxedo Suit Black Navy 8500">
-    <div class="img-wrap" onclick="openGal('Royal 3-Piece Tuxedo Suit', 8500, 'S, M, L, XL', 'Charcoal Black, Navy Blue, Grey', 'VIP No.1 Turkish Wool Fabric', 'Dress vip.png')">
-      <img src="Dress vip.png" alt="Suit"><span class="badge">🔄 4 Angles</span>
+    <div class="img-wrap" onclick="openGal('Royal 3-Piece Tuxedo Suit', 8500, 'S, M, L, XL', 'Charcoal Black, Navy Blue, Grey', 'VIP No.1 Turkish Wool Fabric', ['Dress vip.png','suit2.png','suit3.png','suit4.png'])">
+      <img src="Dress vip.png" alt="Suit"><span class="badge">🔄 Click for 4 Angles</span>
     </div>
     <h3 style="color:#FBBF24;margin:10px 0 4px;">Royal 3-Piece Tuxedo Suit</h3>
     <div style="color:#10B981;font-weight:bold;font-size:18px;">Rs. 8,500</div>
@@ -95,6 +97,7 @@
     </div>
     <select id="qt2"><option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option><option value="20">Qty: 20</option></select>
     <button class="btn-gold" onclick="addCart('Royal 3-Piece Tuxedo Suit',8500,'sz2','cl2','qt2')">🛒 Add to Cart</button>
+    <button class="btn-wa" onclick="waQuick('Royal 3-Piece Tuxedo Suit',8500,'sz2','cl2','qt2')">💬 Direct WhatsApp Order</button>
   </div>
 </div>
 
@@ -106,7 +109,7 @@
   <button class="btn-wa" onclick="window.open('https://wa.me')">💬 WhatsApp Rabta</button>
 </div>
 
-<div style="margin-top:40px;padding:15px 10px 80px;border-top:1px solid #374151;color:#9CA3AF;font-size:12px;">
+<div style="margin-top:40px;padding:15px 10px 90px;border-top:1px solid #374151;color:#9CA3AF;font-size:12px;">
   <strong style="color:#FBBF24;">2026 NOMAN VIP STORE</strong> • Narowal, Pakistan<br>
   <a href="admin.html" style="color:#FBBF24;font-weight:bold;">🔐 Owner Admin Panel</a>
 </div>
@@ -114,7 +117,7 @@
 <!-- GALLERY MODAL -->
 <div id="galModal" class="modal">
   <div class="modal-box" style="text-align:center;">
-    <div style="display:flex;justify-content:space-between;"><b id="gTitle" style="color:#FBBF24;"></b><span onclick="closeM('galModal')" style="cursor:pointer;color:#FBBF24;">✖</span></div>
+    <div style="display:flex;justify-content:space-between;"><b id="gTitle" style="color:#FBBF24;"></b><span onclick="closeM('galModal')" style="cursor:pointer;color:#FBBF24;font-size:18px;">✖</span></div>
     <img id="gMain" class="main-img" src="">
     <div class="thumbs" id="gThumbs"></div>
     <p id="gSpec" style="font-size:12px;color:#D1D5DB;"></p>
@@ -126,16 +129,3 @@
   <div class="modal-box">
     <div style="display:flex;justify-content:space-between;"><b style="color:#FBBF24;">🛒 Your Order</b><span onclick="closeM('cartModal')" style="cursor:pointer;color:#FBBF24;">✖</span></div>
     <div id="cList" style="margin:10px 0;"></div>
-    <p style="color:#10B981;font-weight:bold;">Total: Rs. <span id="cTotal">0</span></p>
-    <p style="font-size:11px;color:#9CA3AF;">💳 JazzCash/EasyPaisa: 0325-1753556 (Muhammad Noman)</p>
-    <input id="uName" placeholder="Poora Naam" style="margin-bottom:6px;">
-    <input id="uPhone" placeholder="Mobile / WhatsApp" style="margin-bottom:6px;">
-    <input id="uEmail" placeholder="Email (Optional)" style="margin-bottom:6px;">
-    <textarea id="uAddr" placeholder="Mukammal Address & City" style="margin-bottom:6px;"></textarea>
-    <button class="btn-wa" onclick="sendOrder()">✅ Confirm &amp; Send to WhatsApp</button>
-  </div>
-</div>
-
-<!-- TRACK MODAL -->
-<div id="trackModal" class="modal">
-  <div class="modal-box">

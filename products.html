@@ -1,137 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Noman VIP Store - Select Sizes & Order</title>
-  <style>
-    body { background: #111827; color: #fff; font-family: Arial, sans-serif; margin: 0; padding: 20px; text-align: center; }
-    .back-btn { display: inline-block; margin-bottom: 20px; color: #FBBF24; text-decoration: none; font-weight: bold; border: 1px solid #FBBF24; padding: 8px 16px; border-radius: 20px; }
-    .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
-    .card { background: #1F2937; border: 1px solid #374151; border-radius: 15px; width: 300px; padding: 18px; }
-    .card img { width: 100%; height: 230px; object-fit: cover; border-radius: 10px; }
-    h2 { color: #FBBF24; margin: 12px 0 5px; }
-    .price { color: #10B981; font-size: 20px; font-weight: bold; margin: 5px 0 15px; }
-    .size-box { margin: 15px 0; }
-    .size-btn { background: #111827; color: #fff; border: 1px solid #4B5563; padding: 8px 14px; margin: 3px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-    .size-btn.active { background: #FBBF24; color: #111827; border-color: #FBBF24; }
-    .wa-btn { background: #25D366; color: #fff; border: none; padding: 12px 24px; border-radius: 25px; font-weight: bold; font-size: 15px; cursor: pointer; width: 100%; margin-top: 10px; }
-    
-    /* Customer Address Box */
-    .address-box { background: #1F2937; border: 1px solid #FBBF24; border-radius: 15px; max-width: 630px; margin: 30px auto; padding: 20px; text-align: left; }
-    .address-box h3 { color: #FBBF24; margin-top: 0; text-align: center; }
-    .input-field { width: 100%; box-sizing: border-box; padding: 11px; margin: 8px 0 14px; border-radius: 8px; border: 1px solid #4B5563; background: #111827; color: #fff; font-size: 14px; }
-    
-    /* Footer */
-    .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #374151; color: #9CA3AF; font-size: 13px; line-height: 1.8; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIP Catalogue - Noman VIP Store</title>
+<style>
+  * { box-sizing: border-box; }
+  body { background:#111827; color:#fff; font-family:Arial, sans-serif; margin:0; padding:0; text-align:center; }
+  
+  /* Top Navbar */
+  .navbar { background:#0B0F19; padding:14px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #FBBF24; flex-wrap:wrap; gap:10px; position:sticky; top:0; z-index:9000; }
+  .logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .logo-badge { background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; font-weight:900; font-size:18px; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .logo-text { color:#FBBF24; font-size:19px; font-weight:bold; letter-spacing:1px; }
+  .nav-links { display:flex; gap:10px; flex-wrap:wrap; }
+  .nav-btn { background:#1F2937; color:#FBBF24; border:1px solid #FBBF24; padding:8px 15px; border-radius:20px; text-decoration:none; font-size:13px; font-weight:bold; cursor:pointer; }
+  .nav-btn:hover, .nav-btn.active { background:#FBBF24; color:#111827; }
+
+  /* VIP Header Banner */
+  .vip-banner { background:linear-gradient(135deg, #0F172A 0%, #1F2937 100%); padding:30px 15px; border-bottom:2px solid #FBBF24; margin-bottom:25px; }
+  .vip-banner h1 { color:#FBBF24; margin:0 0 8px; font-size:28px; }
+  .vip-banner p { color:#D1D5DB; font-size:14px; max-width:600px; margin:0 auto; }
+
+  /* Filter & Search Bar */
+  .filter-bar { display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:25px; padding:0 15px; }
+  .filter-btn { background:#1F2937; color:#fff; border:1px solid #4B5563; padding:9px 18px; border-radius:25px; cursor:pointer; font-weight:bold; font-size:13px; }
+  .filter-btn.active { background:#FBBF24; color:#111827; border-color:#FBBF24; }
+  .search-box { padding:9px 16px; border-radius:25px; border:1px solid #FBBF24; background:#1F2937; color:#fff; width:260px; outline:none; font-size:13px; }
+
+  /* Product Grid & Cards */
+  .grid { display:flex; flex-wrap:wrap; justify-content:center; gap:24px; padding:0 20px 50px; max-width:1250px; margin:0 auto; }
+  .card { background:#1F2937; border:1px solid #374151; border-radius:16px; width:300px; padding:16px; text-align:left; transition:0.3s; position:relative; }
+  .card:hover { border-color:#FBBF24; transform:translateY(-4px); box-shadow:0 8px 25px rgba(251,191,36,0.15); }
+  .img-box { position:relative; cursor:pointer; overflow:hidden; border-radius:12px; }
+  .img-box img { width:100%; height:220px; object-fit:cover; background:#0B0F19; display:block; }
+  .badge-vip { position:absolute; top:10px; left:10px; background:#10B981; color:#fff; font-size:11px; font-weight:bold; padding:4px 10px; border-radius:12px; }
+  .badge-angle { position:absolute; bottom:10px; right:10px; background:rgba(11,15,25,0.9); color:#FBBF24; border:1px solid #FBBF24; font-size:11px; font-weight:bold; padding:4px 10px; border-radius:12px; }
+  
+  .card h3 { color:#FBBF24; margin:12px 0 4px; font-size:18px; }
+  .price { color:#10B981; font-size:20px; font-weight:bold; margin-bottom:6px; }
+  .qual { color:#9CA3AF; font-size:12px; line-height:1.4; margin-bottom:10px; min-height:34px; }
+  
+  .row { display:flex; gap:8px; margin-bottom:8px; }
+  select { flex:1; padding:8px; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; font-size:12px; }
+  .btn-wa { background:#25D366; color:#fff; border:none; padding:11px; border-radius:25px; font-weight:bold; width:100%; cursor:pointer; font-size:14px; margin-top:4px; }
+  .btn-wa:hover { background:#1ebe5d; }
+
+  /* 4-Angle Modal */
+  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:100000; overflow-y:auto; padding:20px; }
+  .modal-box { background:#1F2937; border:2px solid #FBBF24; border-radius:16px; max-width:500px; margin:20px auto; padding:20px; text-align:center; }
+  .main-img { width:100%; height:280px; object-fit:contain; background:#0B0F19; border-radius:10px; border:1px solid #4B5563; margin-bottom:12px; }
+  .thumbs { display:flex; gap:10px; justify-content:center; margin-bottom:12px; flex-wrap:wrap; }
+  .thumbs img { width:68px; height:68px; object-fit:cover; border-radius:8px; cursor:pointer; border:2px solid transparent; opacity:0.6; }
+  .thumbs img.active, .thumbs img:hover { border-color:#FBBF24; opacity:1; }
+  .btn-close { background:#FBBF24; color:#111827; border:none; padding:10px 25px; border-radius:25px; font-weight:bold; cursor:pointer; margin-top:10px; }
+</style>
 </head>
 <body>
 
-  <a href="index.html" class="back-btn">← Back to Home</a>
-  <h1 style="color:#FBBF24; margin-bottom:5px;">Select Your Size & Order</h1>
-  <p style="color:#9CA3AF; margin-top:0;">Pehle apna address likhein, phir size select karke WhatsApp par order karein</p>
-
-  <!-- Customer Delivery Details Box -->
-  <div class="address-box">
-    <h3>📦 Delivery Details (Apna Pata Likhein)</h3>
-    
-    <label style="font-size:13px; color:#D1D5DB;">Customer Name (Poora Naam):</label>
-    <input type="text" id="custName" class="input-field" placeholder="Maslan: Ali Raza">
-
-    <label style="font-size:13px; color:#D1D5DB;">Mobile / WhatsApp Number:</label>
-    <input type="tel" id="custPhone" class="input-field" placeholder="Maslan: 0300-1234567">
-
-    <label style="font-size:13px; color:#D1D5DB;">Complete Address & City (Shehar aur Mukammal Pata):</label>
-    <textarea id="custAddress" class="input-field" rows="2" placeholder="Ghar/Dukaan number, Mohalla/Street, aur Shehar ka naam..."></textarea>
+<div class="navbar">
+  <a href="index.html" class="logo">
+    <div class="logo-badge">NV</div>
+    <span class="logo-text">NOMAN VIP STORE</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-btn">🏠 Home &amp; AI Salesman</a>
+    <a href="products.html" class="nav-btn active">✨ VIP Catalogue</a>
+    <a href="admin.html" class="nav-btn">🔐 Admin</a>
   </div>
+</div>
 
-  <!-- Products Container -->
-  <div class="container">
+<div class="vip-banner">
+  <h1>👑 VIP Collection — Luxury Shoes &amp; Royal Suits</h1>
+  <p>Har product ki tasveer par click karke <b>4 Angles</b> dekhein. Apna Size, Color aur Quantity (1 se 20) select karke direct WhatsApp par order book karein!</p>
+</div>
 
-    <!-- 1. Dress / VIP Suit Card -->
-    <div class="card">
-      <img src="Dress vip.png" alt="VIP Party Suit">
-      <h2>VIP Party Suit</h2>
-      <p style="color:#9CA3AF; font-size:13px;">Premium Wash & Wear • Fine Stitching</p>
-      <div class="price">Rs. 4,800</div>
-      
-      <div class="size-box" id="suitSizes">
-        <p style="font-size:13px; color:#D1D5DB; margin-bottom:6px;">Select Suit Size:</p>
-        <button class="size-btn" onclick="selectSize('suit', 'S', this)">S</button>
-        <button class="size-btn" onclick="selectSize('suit', 'M', this)">M</button>
-        <button class="size-btn active" onclick="selectSize('suit', 'L', this)">L</button>
-        <button class="size-btn" onclick="selectSize('suit', 'XL', this)">XL</button>
-      </div>
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCat('all', this)">All VIP Items</button>
+  <button class="filter-btn" onclick="filterCat('shoes', this)">👞 Luxury Shoes</button>
+  <button class="filter-btn" onclick="filterCat('suits', this)">👔 Royal Suits</button>
+  <input type="text" id="catSearch" class="search-box" onkeyup="renderCatalogue()" placeholder="🔍 Search product, color, price...">
+</div>
 
-      <button class="wa-btn" onclick="orderNow('VIP Party Suit', 'Rs. 4,800', selectedSuit)">Order Suit on WhatsApp</button>
+<div id="catalogueGrid" class="grid"></div>
+
+<!-- 4-Angle Gallery Modal -->
+<div id="angleModal" class="modal">
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <h3 id="mTitle" style="color:#FBBF24;margin:0;">4-Angle View</h3>
+      <span onclick="closeAngleModal()" style="cursor:pointer;color:#FBBF24;font-size:22px;font-weight:bold;">✖</span>
     </div>
+    <img id="mMainImg" class="main-img" src="" alt="Angle View">
+    <div id="mThumbs" class="thumbs"></div>
+    <p id="mDetails" style="color:#D1D5DB;font-size:13px;line-height:1.6;"></p>
+    <button class="btn-close" onclick="closeAngleModal()">✔ Close View</button>
+  </div>
+</div>
 
-    <!-- 2. Shoes Card -->
-    <div class="card">
-      <img src="shoes brand.png" alt="Black Brand Shoes">
-      <h2>Black Brand Shoes</h2>
-      <p style="color:#9CA3AF; font-size:13px;">Pure Leather Finish • Comfort Sole</p>
-      <div class="price">Rs. 3,500</div>
+<script>
+const defaultProducts = [
+  {
+    id: "p1",
+    category: "shoes",
+    name: "VIP Patent Leather Loafers",
+    price: 4500,
+    quality: "A+ Import Export Quality Pure Glossy Leather, Soft Cushioned Sole (Number One VIP Quality)",
+    colors: ["Jet Black", "Dark Brown", "Burgundy"],
+    sizes: ["40", "41", "42", "43", "44"],
+    images: ["shoes brand.png", "shoes brand.png", "shoes brand.png", "shoes brand.png"]
+  },
+  {
+    id: "p2",
+    category: "suits",
+    name: "Royal 3-Piece Tuxedo Suit",
+    price: 8500,
+    quality: "VIP Turkish Wool-Blend Fabric, Fine Tailoring, Wrinkle-Free Number One Quality",
+    colors: ["Charcoal Black", "Navy Blue", "Royal Grey"],
+    sizes: ["S", "M", "L", "XL"],
+    images: ["Dress vip.png", "Dress vip.png", "Dress vip.png", "Dress vip.png"]
+  }
+];
 
-      <div class="size-box" id="shoeSizes">
-        <p style="font-size:13px; color:#D1D5DB; margin-bottom:6px;">Select Shoe Number:</p>
-        <button class="size-btn" onclick="selectSize('shoe', '7', this)">7</button>
-        <button class="size-btn active" onclick="selectSize('shoe', '8', this)">8</button>
-        <button class="size-btn" onclick="selectSize('shoe', '9', this)">9</button>
-        <button class="size-btn" onclick="selectSize('shoe', '10', this)">10</button>
+let storeData = JSON.parse(localStorage.getItem("nomanStoreData")) || {
+  ownerWa: "923251753556",
+  products: defaultProducts
+};
+
+let activeCat = "all";
+
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  renderCatalogue();
+}
+
+function renderCatalogue() {
+  const grid = document.getElementById("catalogueGrid");
+  const q = document.getElementById("catSearch").value.toLowerCase();
+  grid.innerHTML = "";
+
+  const list = storeData.products.filter(p => {
+    const matchC = activeCat === "all" || p.category === activeCat;
+    const matchQ = p.name.toLowerCase().includes(q) || p.colors.join(" ").toLowerCase().includes(q) || String(p.price).includes(q);
+    return matchC && matchQ;
+  });
+
+  if (list.length === 0) {
+    grid.innerHTML = "<p style='color:#9CA3AF;'>Is category mein koi product nahi mila.</p>";
+    return;
+  }
+
+  list.forEach(p => {
+    let sizeHtml = p.sizes.map(s => `<option value="${s}">Size: ${s}</option>`).join("");
+    let colorHtml = p.colors.map(c => `<option value="${c}">${c}</option>`).join("");
+    let qtyHtml = "";
+    for (let i = 1; i <= 20; i++) qtyHtml += `<option value="${i}">Qty: ${i}</option>`;
+
+    grid.innerHTML += `
+      <div class="card">
+        <div class="img-box" onclick="openAngleModal('${p.id}')">
+          <span class="badge-vip">★ VIP No.1</span>
+          <img src="${p.images}" alt="${p.name}">
+          <span class="badge-angle">🔄 4 Angles</span>
+        </div>
+        <h3>${p.name}</h3>
+        <div class="price">Rs. ${p.price.toLocaleString()}</div>
+        <div class="qual">${p.quality}</div>
+        <div class="row">
+          <select id="sz_${p.id}">${sizeHtml}</select>
+          <select id="cl_${p.id}">${colorHtml}</select>
+        </div>
+        <div class="row">
+          <select id="qt_${p.id}">${qtyHtml}</select>
+        </div>
+        <button class="btn-wa" onclick="directWhatsAppOrder('${p.id}')">💬 Direct Order on WhatsApp</button>
       </div>
+    `;
+  });
+}
 
-      <button class="wa-btn" onclick="orderNow('Black Brand Shoes', 'Rs. 3,500', selectedShoe)">Order Shoes on WhatsApp</button>
-    </div>
+function openAngleModal(id) {
+  const p = storeData.products.find(x => x.id === id);
+  if (!p) return;
 
-  </div>
-
-  <!-- Trust & Policy Footer -->
-  <div class="footer">
-    <strong style="color:#FBBF24; font-size:15px;">Noman VIP Store</strong><br>
-    🚚 Pure Pakistan mein Cash on Delivery (COD) Available • Delivery Time: 3 se 4 Din<br>
-    🔄 7 Days Easy Size Exchange Policy • 📞 WhatsApp Support: 0325-1753556
-  </div>
-
-  <script>
-    var selectedSuit = 'L';
-    var selectedShoe = '8';
-
-    function selectSize(type, size, btn) {
-      var parent = btn.parentElement;
-      var buttons = parent.getElementsByClassName('size-btn');
-      for (var i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active');
-      }
-      btn.classList.add('active');
-      if (type === 'suit') selectedSuit = size;
-      if (type === 'shoe') selectedShoe = size;
-    }
-
-    function orderNow(item, price, size) {
-      var name = document.getElementById('custName').value.trim();
-      var custPhone = document.getElementById('custPhone').value.trim();
-      var address = document.getElementById('custAddress').value.trim();
-
-      if (name === "" || custPhone === "" || address === "") {
-        alert("Meherbani farma kar upar apna Naam, Mobile Number, aur Address zaroor likhein!");
-        return;
-      }
-
-      var shopPhone = "923251753556";
-      var msg = "Assalam-o-Alaikum! *Noman VIP Store* se naya order:%0A%0A" +
-                "🛍️ *Item:* " + item + "%0A" +
-                "📏 *Size/Number:* " + size + "%0A" +
-                "💰 *Price:* " + price + "%0A%0A" +
-                "👤 *Name:* " + name + "%0A" +
-                "📞 *Phone:* " + custPhone + "%0A" +
-                "📍 *Address:* " + address + "%0A" +
-                "🚚 *Payment:* Cash on Delivery (COD)";
-
-      window.open("https://wa.me" + shopPhone + "?text=" + msg, "_blank");
-    }
-  </script>
-
-</body>
-</html>
+  document.getElementById("mTitle").innerText = p.name + " (4 Angles)";
+  document.getElementById("mMainImg").src = p.images;
+  document.getElementById("mDetails").innerHTML = `
+    <strong style="color:#10B981;font-size:16px;">Price: Rs. ${p.price.toLocaleString()}</strong><br>
+    <b>Sizes:</b> ${p.sizes.join(", ")} | <b>Colors:</b> ${p.colors.join(", ")}<br>
+    <b>Quality:</b> ${p.quality}
+  `;

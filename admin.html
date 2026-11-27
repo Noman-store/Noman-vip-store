@@ -17,83 +17,65 @@
   .stat-card { background:#1F2937; border:1px solid #374151; border-radius:12px; padding:18px; border-left:4px solid #FBBF24; }
   .stat-card h4 { margin:0 0 8px; color:#9CA3AF; font-size:13px; }
   .stat-card .val { font-size:24px; font-weight:bold; color:#10B981; }
-  .stat-card .sub { font-size:12px; color:#FBBF24; margin-top:5px; }
-  .pay-breakdown { background:#1F2937; border:1px solid #374151; border-radius:12px; padding:15px 20px; margin-bottom:25px; display:flex; justify-content:space-around; flex-wrap:wrap; gap:15px; }
-  .pay-item { text-align:center; }
-  .pay-item span { display:block; font-size:12px; color:#9CA3AF; }
-  .pay-item strong { font-size:18px; color:#FBBF24; }
   .tabs { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
   .tab-btn { background:#1F2937; color:#fff; border:1px solid #4B5563; padding:10px 18px; border-radius:25px; cursor:pointer; font-weight:bold; }
   .tab-btn.active { background:#FBBF24; color:#111827; border-color:#FBBF24; }
   .section { display:none; background:#1F2937; border:1px solid #374151; border-radius:15px; padding:20px; margin-bottom:30px; }
   .section.active { display:block; }
-  .form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:15px; }
-  label { display:block; font-size:12px; color:#D1D5DB; margin-bottom:4px; font-weight:bold; }
-  input, select, textarea { width:100%; padding:10px; margin-bottom:12px; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; font-size:13px; }
+  .form-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:15px; }
+  label { display:block; font-size:12px; color:#FBBF24; margin-bottom:4px; font-weight:bold; }
+  input, select, textarea { width:100%; padding:9px; margin-bottom:10px; border-radius:8px; border:1px solid #4B5563; background:#111827; color:#fff; font-size:13px; }
   .btn-save { background:#10B981; color:#fff; border:none; padding:12px 25px; border-radius:25px; font-weight:bold; cursor:pointer; font-size:15px; width:100%; margin-top:10px; }
   .btn-gold { background:#FBBF24; color:#111827; border:none; padding:10px 20px; border-radius:20px; font-weight:bold; cursor:pointer; }
+  .btn-del { background:#EF4444; color:#fff; border:none; padding:6px 12px; border-radius:8px; font-weight:bold; cursor:pointer; font-size:12px; }
   table { width:100%; border-collapse:collapse; font-size:13px; margin-top:10px; }
   th, td { padding:12px 10px; border-bottom:1px solid #374151; text-align:left; }
   th { background:#0B0F19; color:#FBBF24; }
   .status-sel { padding:6px; border-radius:6px; background:#111827; color:#10B981; border:1px solid #10B981; font-weight:bold; }
-  .prod-item-box { background:#111827; padding:15px; border-radius:10px; border:1px solid #374151; position:relative; }
+  .prod-item-box { background:#111827; padding:15px; border-radius:12px; border:1px solid #4B5563; }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <h2>🔐 NOMAN VIP STORE - LIVE CLOUD ADMIN</h2>
+  <h2>🔐 NOMAN VIP STORE - OWNER ADMIN PANEL</h2>
   <a href="index.html">🌐 View Live Store</a>
 </div>
 
 <div id="loginScreen" class="login-box">
   <h3 style="color:#FBBF24;margin-top:0;">Owner Security Lock</h3>
   <p style="font-size:13px;color:#9CA3AF;">Admin Panel kholne ke liye password daalein:</p>
-  <input type="password" id="adminPassInput" placeholder="Password (Default: noman123)" onkeypress="if(event.key==='Enter') checkLogin()">
+  <input type="password" id="adminPassInput" placeholder="Enter Password" onkeypress="if(event.key==='Enter') checkLogin()">
   <button class="btn-gold" style="width:100%;padding:12px;" onclick="checkLogin()">🔓 Unlock Dashboard</button>
 </div>
 
 <div id="adminDashboard" class="container" style="display:none;">
-  <h3 style="color:#FBBF24;margin-bottom:12px;">📊 Live Kamai aur Profit Report</h3>
   <div class="stats-grid">
     <div class="stat-card">
-      <h4>📅 Aaj Ki Kamai (Today)</h4>
-      <div class="val">Rs. <span id="todaySale">0</span></div>
-      <div class="sub">Pure Profit: Rs. <span id="todayProfit">0</span></div>
-    </div>
-    <div class="stat-card">
-      <h4>🗓️ Is Mahine Ki Kamai (Month)</h4>
-      <div class="val">Rs. <span id="monthSale">0</span></div>
-      <div class="sub">Pure Profit: Rs. <span id="monthProfit">0</span></div>
-    </div>
-    <div class="stat-card">
-      <h4>🏆 Poore Saal Ki Kamai (Year)</h4>
-      <div class="val">Rs. <span id="yearSale">0</span></div>
-      <div class="sub">Pure Profit: Rs. <span id="yearProfit">0</span></div>
+      <h4>💰 Total Sale (Kamai)</h4>
+      <div class="val">Rs. <span id="totalSaleVal">0</span></div>
     </div>
     <div class="stat-card">
       <h4>📦 Total Orders</h4>
-      <div class="val"><span id="totalOrdersCount">0</span> Orders</div>
-      <div class="sub">Live Synced with Cloud</div>
+      <div class="val"><span id="totalOrdersVal">0</span> Orders</div>
     </div>
-  </div>
-
-  <div class="pay-breakdown">
-    <div class="pay-item"><span>📱 JazzCash Se Aaya</span><strong>Rs. <span id="jazzTotal">0</span></strong></div>
-    <div class="pay-item"><span>💚 EasyPaisa Se Aaya</span><strong>Rs. <span id="easyTotal">0</span></strong></div>
-    <div class="pay-item"><span>🏦 Bank Transfer Se Aaya</span><strong>Rs. <span id="bankTotal">0</span></strong></div>
+    <div class="stat-card">
+      <h4>👟 Total Store Products</h4>
+      <div class="val"><span id="totalProdsVal">0</span> Items</div>
+    </div>
   </div>
 
   <div class="tabs">
     <button class="tab-btn active" onclick="showTab('ordersTab', this)">📦 Live Orders &amp; Tracking</button>
-    <button class="tab-btn" onclick="showTab('productsTab', this)">👟 Add / Edit / Delete Products</button>
-    <button class="tab-btn" onclick="showTab('storeTab', this)">🏪 Store Logo, Address &amp; Pass</button>
+    <button class="tab-btn" onclick="showTab('productsTab', this)">👟 Edit / Add Products &amp; Prices</button>
+    <button class="tab-btn" onclick="showTab('storeTab', this)">💳 Accounts, WhatsApp &amp; Password</button>
   </div>
 
+  <!-- TAB 1: ORDERS & LIVE TRACKING -->
   <div id="ordersTab" class="section active">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
-      <h3 style="color:#FBBF24;margin:0;">Customer Orders &amp; Live Tracking</h3>
-      <button class="btn-gold" onclick="renderOrdersAndProfit()">🔄 Refresh Orders</button>
+      <h3 style="color:#FBBF24;margin:0;">Customer Orders &amp; Live Tracking Status</h3>
+      <button class="btn-gold" onclick="renderOrders()">🔄 Refresh Orders</button>
     </div>
     <div style="overflow-x:auto;">
       <table>
@@ -101,11 +83,11 @@
           <tr>
             <th>Tracking ID</th>
             <th>Date</th>
-            <th>Customer &amp; Address</th>
-            <th>Items</th>
+            <th>Customer Details</th>
+            <th>Items &amp; Size</th>
             <th>Bill &amp; Payment</th>
-            <th>Tracking Status</th>
-            <th>Action</th>
+            <th>Update Tracking Status</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody id="ordersTableBody"></tbody>
@@ -113,75 +95,111 @@
     </div>
   </div>
 
+  <!-- TAB 2: PRODUCTS, 4-ANGLES & PRICES -->
   <div id="productsTab" class="section">
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:15px;">
-      <h3 style="color:#FBBF24;margin:0;">Manage Store Products (4-Angle Photos &amp; Prices)</h3>
+      <h3 style="color:#FBBF24;margin:0;">Products, 4-Angle Photos, Sizes &amp; Prices</h3>
       <button class="btn-gold" onclick="addNewProduct()">➕ Add New Product</button>
     </div>
+    <p style="font-size:12px;color:#9CA3AF;margin-bottom:15px;">Tip: Tasveer ke box mein apne folder ki file ka naam likhein (maslan <b>shoes brand.png</b> ya <b>Dress vip.png</b>) ya internet image link paste karein.</p>
     <div id="adminProductsList" class="form-grid"></div>
-    <button class="btn-save" onclick="saveStoreSettings()">💾 Save All Products to Live Website</button>
+    <button class="btn-save" onclick="saveAllData()">💾 Save All Products to Store</button>
   </div>
 
+  <!-- TAB 3: ACCOUNTS & SETTINGS -->
   <div id="storeTab" class="section">
-    <h3 style="color:#FBBF24;margin-top:0;">Store Branding, Address &amp; Password</h3>
+    <h3 style="color:#FBBF24;margin-top:0;">Payment Accounts, WhatsApp &amp; Security</h3>
     <div class="form-grid">
       <div>
-        <label>Store Name:</label><input type="text" id="editStoreName">
-        <label>Logo Short Text:</label><input type="text" id="editLogoBadge" maxlength="4">
-        <label>Shop Address:</label><input type="text" id="editShopAddr">
+        <label>Owner WhatsApp Number (923...):</label>
+        <input type="text" id="editOwnerWa">
+        <label>JazzCash Account Number &amp; Name:</label>
+        <input type="text" id="editJazz">
       </div>
       <div>
-        <label>Owner WhatsApp Number (923...):</label><input type="text" id="editOwnerWa">
-        <label>Admin Panel Password:</label><input type="text" id="editAdminPass">
+        <label>EasyPaisa Account Number &amp; Name:</label>
+        <input type="text" id="editEasy">
+        <label>Bank Account Detail:</label>
+        <input type="text" id="editBank">
+        <label>Admin Panel Password:</label>
+        <input type="text" id="editAdminPass">
       </div>
     </div>
-    <button class="btn-save" onclick="saveStoreSettings()">💾 Save Store Settings to Cloud</button>
+    <button class="btn-save" onclick="saveAllData()">💾 Save Account &amp; Password Settings</button>
   </div>
 </div>
 
 <script>
-const DB_URL = "https://firebaseio.com";
+const defaultProducts = [
+  {
+    id: "p1",
+    category: "shoes",
+    name: "VIP Patent Leather Loafers",
+    price: 4500,
+    quality: "A+ Import Export Quality Pure Glossy Leather, Soft Cushioned Sole (Number One VIP Quality)",
+    colors: ["Jet Black", "Dark Brown", "Burgundy"],
+    sizes: ["40", "41", "42", "43", "44"],
+    images: ["shoes brand.png", "shoes brand.png", "shoes brand.png", "shoes brand.png"]
+  },
+  {
+    id: "p2",
+    category: "suits",
+    name: "Royal 3-Piece Tuxedo Suit",
+    price: 8500,
+    quality: "VIP Turkish Wool-Blend Fabric, Fine Tailoring, Wrinkle-Free Number One Quality",
+    colors: ["Charcoal Black", "Navy Blue", "Royal Grey"],
+    sizes: ["S", "M", "L", "XL"],
+    images: ["Dress vip.png", "Dress vip.png", "Dress vip.png", "Dress vip.png"]
+  }
+];
 
-let storeCfg = {
-  adminPass: "noman123", storeName: "NOMAN VIP STORE", logoBadge: "NV",
-  shopAddr: "Main Bazar, Narowal, Punjab, Pakistan", ownerWa: "923251753556",
-  products: [
-    { id: "p1", category: "shoes", name: "Black Brand Shoes", price: 3500, cost: 2200, imgs: ["shoes brand.png", "shoes brand.png", "shoes brand.png", "shoes brand.png"], specs: "Pure Leather Finish • Comfort Sole • 3-4 Days Delivery", colors: ["Black", "Brown", "Tan"], sizes: ["7", "8", "9", "10"] },
-    { id: "p2", category: "suits", name: "VIP Party Suit", price: 4800, cost: 3100, imgs: ["Dress vip.png", "Dress vip.png", "Dress vip.png", "Dress vip.png"], specs: "Premium Wash & Wear • Fine Stitching • 3-4 Days Delivery", colors: ["Black", "Navy Blue", "White"], sizes: ["S", "M", "L", "XL"] }
-  ]
+let storeData = JSON.parse(localStorage.getItem("nomanStoreData")) || {
+  adminPass: "noman123",
+  ownerWa: "923251753556",
+  jazzCash: "0325-1753556 (Muhammad Noman)",
+  easyPaisa: "0325-1753556 (Muhammad Noman)",
+  bankAcc: "Meezan Bank - PK00MEZN000000123456789 (Muhammad Noman)",
+  products: defaultProducts
 };
 
-async function initCloudCfg() {
-  try {
-    let r = await fetch(`${DB_URL}/storeCfg.json`);
-    let d = await r.json();
-    if (d) {
-      storeCfg = { ...storeCfg, ...d };
-      if (!storeCfg.products || !Array.isArray(storeCfg.products)) storeCfg.products = [];
-    }
-  } catch (e) {}
-}
-initCloudCfg();
+if (!storeData.adminPass) storeData.adminPass = "noman123";
 
-async function checkLogin() {
-  await initCloudCfg();
-  let pass = document.getElementById('adminPassInput').value;
-  if (pass === storeCfg.adminPass) {
-    document.getElementById('loginScreen').style.display = 'none';
-    document.getElementById('adminDashboard').style.display = 'block';
-    loadAdminData();
+function checkLogin() {
+  const pass = document.getElementById("adminPassInput").value;
+  if (pass === storeData.adminPass) {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminDashboard").style.display = "block";
+    loadAdminUI();
   } else {
-    alert("❌ Galat Password!");
+    alert("❌ Galat Password! Dobara koshish karein.");
   }
 }
 
 function showTab(tabId, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  btn.classList.add('active');
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.getElementById(tabId).classList.add("active");
+  btn.classList.add("active");
 }
 
-function loadAdminData() {
-  document.getElementById('editStoreName').value = storeCfg.storeName;
-  document.getElementById('editLogoBadge').value = storeCfg.logoBadge;
+function loadAdminUI() {
+  document.getElementById("editOwnerWa").value = storeData.ownerWa || "923251753556";
+  document.getElementById("editJazz").value = storeData.jazzCash || "";
+  document.getElementById("editEasy").value = storeData.easyPaisa || "";
+  document.getElementById("editBank").value = storeData.bankAcc || "";
+  document.getElementById("editAdminPass").value = storeData.adminPass || "noman123";
+
+  renderAdminProducts();
+  renderOrders();
+}
+
+function renderAdminProducts() {
+  const container = document.getElementById("adminProductsList");
+  container.innerHTML = "";
+  document.getElementById("totalProdsVal").innerText = storeData.products.length;
+
+  storeData.products.forEach((p, idx) => {
+    container.innerHTML += `
+      <div class="prod-item-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <strong style="color:#FBBF24;">Product #${idx + 1}</strong>

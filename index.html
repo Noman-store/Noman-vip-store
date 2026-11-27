@@ -1,143 +1,127 @@
-<!-- CONTACT SECTION -->
-<div id="contactSec" style="display:none;max-width:500px;margin:20px auto;background:#1F2937;padding:20px;border-radius:14px;border:1px solid #FBBF24;text-align:left;">
-  <h3 style="color:#FBBF24;margin-top:0;">📍 Shop &amp; Accounts</h3>
-  <p><b>Address:</b> Main Bazar, Narowal, Punjab, Pakistan</p>
-  <p><b>WhatsApp:</b> +92 325 1753556</p>
-  <p><b>JazzCash / EasyPaisa:</b> 0325-1753556 (Muhammad Noman)</p>
-  <button class="btn-wa" onclick="window.open('https://wa.me')">💬 WhatsApp Rabta</button>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noman VIP Store</title>
+<style>
+  * { box-sizing:border-box; }
+  body { background:#111827; color:#fff; font-family:Arial,sans-serif; margin:0; text-align:center; }
+  .navbar { background:#0B0F19; padding:12px 20px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #FBBF24; flex-wrap:wrap; gap:8px; position:sticky; top:0; z-index:900; }
+  .logo { display:flex; align-items:center; gap:8px; cursor:pointer; }
+  .logo-badge { background:#FBBF24; color:#111827; font-weight:900; width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+  .logo-text { color:#FBBF24; font-size:19px; font-weight:bold; }
+  .nav-btn { color:#D1D5DB; font-size:13px; font-weight:bold; background:none; border:none; cursor:pointer; padding:6px 11px; border-radius:15px; }
+  .nav-btn:hover, .nav-btn.active { background:#1F2937; color:#FBBF24; }
+  .cart-btn { background:#FBBF24; color:#111827; }
+  .hero { background:linear-gradient(135deg, #0F172A, #1F2937); border-bottom:2px solid #FBBF24; padding:25px 15px; margin-bottom:20px; }
+  .hero h1 { margin:0 0 8px; font-size:26px; }
+  .hero span { color:#FBBF24; }
 
-<!-- FOOTER (Store Name, Narowal Address & Admin Link) -->
-<div style="margin-top:40px;padding:18px 10px 95px;border-top:1px solid #374151;color:#9CA3AF;font-size:12px;">
-  <strong style="color:#FBBF24;font-size:14px;">2026 NOMAN VIP STORE</strong><br>
-  📍 Shop Address: Main Bazar, Narowal, Punjab, Pakistan<br>
-  🚚 Pure Pakistan Delivery • Advance Payment (JazzCash / EasyPaisa / Bank)<br>
-  <a href="admin.html" style="color:#FBBF24;font-weight:bold;text-decoration:underline;">🔐 Owner Admin Panel</a>
-</div>
+  /* Stylish Search Bar with Button */
+  .search-wrap { max-width:480px; margin:0 auto 20px; padding:0 15px; display:flex; gap:8px; }
+  .search-wrap input { flex:1; border:2px solid #FBBF24; border-radius:25px; padding:11px 18px; background:#1F2937; color:#fff; font-size:13px; outline:none; }
+  .search-btn { background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; border:none; border-radius:25px; padding:0 20px; font-weight:bold; cursor:pointer; font-size:13px; box-shadow:0 3px 10px rgba(251,191,36,0.3); }
+  .search-btn:hover { transform:scale(1.03); }
 
-<!-- CART MODAL -->
-<div id="cartModal" class="modal">
-  <div class="modal-box">
-    <div style="display:flex;justify-content:space-between;"><b style="color:#FBBF24;">🛒 Your Order</b><span onclick="closeM('cartModal')" style="cursor:pointer;color:#FBBF24;">✖</span></div>
-    <div id="cList" style="margin:10px 0;"></div>
-    <p style="color:#10B981;font-weight:bold;">Total: Rs. <span id="cTotal">0</span></p>
-    <p style="font-size:11px;color:#9CA3AF;">💳 JazzCash/EasyPaisa: 0325-1753556 (Muhammad Noman)</p>
-    <input id="uName" placeholder="Poora Naam" style="margin-bottom:6px;">
-    <input id="uPhone" placeholder="Mobile / WhatsApp" style="margin-bottom:6px;">
-    <input id="uEmail" placeholder="Email (Optional)" style="margin-bottom:6px;">
-    <textarea id="uAddr" placeholder="Mukammal Address & City" style="margin-bottom:6px;"></textarea>
-    <button class="btn-wa" onclick="sendOrder()">✅ Confirm &amp; Send to WhatsApp</button>
+  /* Hero AI Button */
+  .hero-ai-btn { background:linear-gradient(135deg, #FBBF24, #F59E0B); color:#111827; border:none; padding:11px 22px; border-radius:25px; font-weight:bold; font-size:13px; cursor:pointer; margin-top:12px; box-shadow:0 4px 15px rgba(251,191,36,0.4); }
+  .hero-ai-btn:hover { transform:scale(1.04); }
+
+  /* VIP Product Card with Side 4-Angles */
+  .product-card { background:#1F2937; border:1px solid #374151; border-radius:16px; width:360px; max-width:95vw; padding:15px; display:inline-block; vertical-align:top; margin:10px; }
+  .product-card:hover { border-color:#FBBF24; }
+  .gallery-box { display:flex; gap:8px; height:230px; }
+  .main-pic { flex:1; background:#0B0F19; border-radius:10px; overflow:hidden; border:1px solid #374151; position:relative; }
+  .main-pic img { width:100%; height:100%; object-fit:contain; transition:0.3s ease; }
+  .side-angles { width:62px; display:flex; flex-direction:column; gap:6px; }
+  .ang-thumb { flex:1; background:#0B0F19; border:2px solid #374151; border-radius:8px; overflow:hidden; cursor:pointer; }
+  .ang-thumb.active { border-color:#FBBF24; }
+  .ang-thumb img { width:200%; height:200%; object-fit:cover; display:block; }
+
+  .sel-row { display:flex; gap:6px; margin:8px 0; }
+  select, input, textarea { width:100%; padding:8px; border-radius:8px; background:#111827; color:#fff; border:1px solid #4B5563; font-size:12px; }
+  .btn-gold { background:#FBBF24; color:#111827; border:none; padding:10px; border-radius:20px; font-weight:bold; cursor:pointer; width:100%; margin-top:5px; }
+  .btn-wa { background:#25D366; color:#fff; border:none; padding:10px; border-radius:20px; font-weight:bold; cursor:pointer; width:100%; margin-top:6px; }
+  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; overflow-y:auto; padding:15px; }
+  .modal-box { background:#1F2937; border:2px solid #FBBF24; border-radius:14px; max-width:450px; margin:20px auto; padding:18px; text-align:left; }
+
+  /* Floating WhatsApp & AI Buttons */
+  .wa-float { position:fixed; bottom:18px; left:18px; background:#25D366; color:#fff; padding:12px 18px; border-radius:25px; font-weight:bold; z-index:8000; box-shadow:0 4px 12px rgba(0,0,0,0.6); text-decoration:none; font-size:13px; }
+  .ai-btn { position:fixed; bottom:18px; right:18px; background:linear-gradient(135deg, #FBBF24, #D97706); color:#111827; border:none; padding:12px 20px; border-radius:25px; font-weight:bold; cursor:pointer; z-index:8000; box-shadow:0 4px 15px rgba(251,191,36,0.5); font-size:13px; }
+  .ai-box { display:none; position:fixed; bottom:72px; right:18px; width:345px; max-width:92vw; background:#1F2937; border:2px solid #FBBF24; border-radius:14px; z-index:9999; text-align:left; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.8); }
+  .ai-msgs { height:255px; overflow-y:auto; padding:10px; font-size:12px; display:flex; flex-direction:column; gap:7px; }
+  .m-ai { background:#111827; padding:8px 10px; border-radius:8px; border-left:3px solid #FBBF24; line-height:1.4; }
+  .m-usr { background:#FBBF24; color:#111827; padding:7px 10px; border-radius:8px; align-self:flex-end; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="logo" onclick="filterCat('all', document.querySelector('.nav-btn'))">
+    <div class="logo-badge">NV</div><span class="logo-text">NOMAN VIP STORE</span>
+  </div>
+  <div>
+    <button class="nav-btn active" onclick="filterCat('all', this)">🏠 Home</button>
+    <button class="nav-btn" onclick="filterCat('shoes', this)">👞 Shoes</button>
+    <button class="nav-btn" onclick="filterCat('suits', this)">👔 Suits</button>
+    <button class="nav-btn" onclick="filterCat('contact', this)">📍 Contact</button>
+    <button class="nav-btn" onclick="openM('trackModal')">📦 Track</button>
+    <button class="nav-btn cart-btn" onclick="openCart()">🛒 Cart (<span id="cCount">0</span>)</button>
   </div>
 </div>
 
-<!-- TRACK MODAL -->
-<div id="trackModal" class="modal">
-  <div class="modal-box">
-    <div style="display:flex;justify-content:space-between;"><b style="color:#FBBF24;">📦 Track Order</b><span onclick="closeM('trackModal')" style="cursor:pointer;color:#FBBF24;">✖</span></div>
-    <input id="tInp" placeholder="Tracking ID (e.g. NV-1234)" style="margin:10px 0;">
-    <button class="btn-gold" onclick="checkTrack()">🔍 Check Status</button>
-    <div id="tRes" style="margin-top:10px;font-size:12px;"></div>
-  </div>
+<div class="hero" id="heroSec">
+  <h1>Premium <span>Suits</span> &amp; Luxury <span>Shoes</span></h1>
+  <p style="color:#9CA3AF;font-size:13px;margin:0;">Side par <b>4 Angles</b> par click karke har side dekhein, ya seedha <b>WhatsApp / AI Salesman</b> se order karein!</p>
+  <button class="hero-ai-btn" onclick="toggleAI()">🤖 Chat with 24/7 AI Assistant (Order &amp; Deal)</button>
 </div>
 
-<!-- DONO KONON KE AI BUTTONS -->
-<button class="ai-left-btn" onclick="openAI('chat')">🔍 AI Chat Search</button>
-<button class="ai-right-btn" onclick="openAI('voice')">🎙️ AI Bolne Wala Assistant</button>
-
-<!-- AI BOX -->
-<div id="aiBox" class="ai-box">
-  <div style="background:#0B0F19;padding:10px;display:flex;justify-content:space-between;align-items:center;">
-    <b id="aiTitle" style="color:#FBBF24;">🤖 Noman VIP AI Assistant</b>
-    <span onclick="document.getElementById('aiBox').style.display='none'" style="cursor:pointer;color:#FBBF24;font-weight:bold;">✖</span>
+<div id="shopSec">
+  <div class="search-wrap">
+    <input type="text" id="sInp" onkeyup="searchP()" placeholder="🔍 Search shoes, suits, color, price...">
+    <button class="search-btn" onclick="searchP()">🔍 Search</button>
   </div>
-  <div class="ai-msgs" id="aiMsgs"><div class="m-ai">Assalam-o-Alaikum! Main 24/7 AI Assistant hoon. Likh kar ya 🎤 Mic daba kar bol kar order book karein!</div></div>
-  <div style="display:flex;padding:6px;background:#0B0F19;gap:5px;align-items:center;">
-    <button class="mic-btn" onclick="startVoice()" title="Bol kar poochein">🎤</button>
-    <input id="aiInp" placeholder="Likhein ya Mic dabayein..." onkeypress="if(event.key==='Enter') askAI(false)">
-    <button onclick="askAI(false)" style="background:#FBBF24;border:none;border-radius:10px;padding:8px 12px;font-weight:bold;cursor:pointer;">Send</button>
-  </div>
-</div>
 
-<script>
-var cart=[], waNum="923251753556", step=0, oData={};
-function viewSide(mainId, thumbEl, pos){
-  var m = document.getElementById(mainId);
-  thumbEl.parentElement.querySelectorAll(".ang-thumb").forEach(t=>t.classList.remove("active"));
-  thumbEl.classList.add("active");
-  if(pos === "full"){ m.style.width="100%"; m.style.height="100%"; m.style.objectFit="contain"; m.style.objectPosition="center"; }
-  else { m.style.width="200%"; m.style.height="200%"; m.style.objectFit="cover"; m.style.objectPosition=pos; }
-}
-function filterCat(c,b){
-  document.querySelectorAll(".nav-btn").forEach(x=>x.classList.remove("active"));
-  if(b)b.classList.add("active");
-  document.getElementById("contactSec").style.display=c==="contact"?"block":"none";
-  document.getElementById("shopSec").style.display=c==="contact"?"none":"block";
-  document.getElementById("heroSec").style.display=c==="contact"?"none":"block";
-  document.querySelectorAll(".product-card").forEach(p=>p.style.display=(c==="all"||p.dataset.cat===c)?"inline-block":"none");
-}
-function searchP(){
-  var q=document.getElementById("sInp").value.toLowerCase();
-  document.querySelectorAll(".product-card").forEach(p=>p.style.display=p.dataset.name.toLowerCase().includes(q)?"inline-block":"none");
-}
-function openM(id){document.getElementById(id).style.display="block";}
-function closeM(id){document.getElementById(id).style.display="none";}
-function waQuick(n,p,s,c,q){
-  var sz=document.getElementById(s).value, cl=document.getElementById(c).value, qt=+document.getElementById(q).value;
-  var msg="*DIRECT ORDER - NOMAN VIP STORE*%0A*Item:* "+n+"%0A*Size:* "+sz+"%0A*Color:* "+cl+"%0A*Qty:* "+qt+"%0A*Total:* Rs."+(p*qt);
-  window.open("https://wa.me"+waNum+"?text="+msg,"_blank");
-}
-function addCart(n,p,s,c,q){
-  var sz=document.getElementById(s).value, cl=document.getElementById(c).value, qt=+document.getElementById(q).value;
-  cart.push({n,p,sz,cl,qt,sub:p*qt});
-  document.getElementById("cCount").innerText=cart.reduce((a,b)=>a+b.qt,0);
-  alert("✅ "+qt+"x "+n+" Cart mein shamil!");
-}
-function openCart(){
-  var l=document.getElementById("cList"), t=0; l.innerHTML="";
-  cart.forEach((x,i)=>{t+=x.sub; l.innerHTML+='<div style="font-size:12px;margin-bottom:5px;">'+x.qt+'x '+x.n+' ('+x.sz+','+x.cl+') - Rs.'+x.sub+' <button onclick="cart.splice('+i+',1);openCart()" style="color:red;">X</button></div>';});
-  document.getElementById("cTotal").innerText=t; openM("cartModal");
-}
-function sendOrder(){
-  if(!cart.length)return alert("Cart khali hai!");
-  var n=document.getElementById("uName").value, ph=document.getElementById("uPhone").value, em=document.getElementById("uEmail").value, ad=document.getElementById("uAddr").value;
-  if(!n||!ph||!ad)return alert("Naam, Phone aur Address likhein!");
-  var tid="NV-"+Math.floor(1000+Math.random()*9000), tot=cart.reduce((a,b)=>a+b.sub,0);
-  var itm=cart.map(x=>x.qt+"x "+x.n+" ("+x.sz+","+x.cl+")").join(" | ");
-  var ords=JSON.parse(localStorage.getItem("nomanOrders")||"[]");
-  ords.push({id:tid,name:n,phone:ph,email:em,address:ad,items:itm,total:tot,payment:"Advance",date:new Date().toLocaleDateString(),status:"Order Received (Narowal Hub)"});
-  localStorage.setItem("nomanOrders",JSON.stringify(ords));
-  var msg="*NEW ORDER*%0AID: "+tid+"%0AName: "+n+"%0APhone: "+ph+"%0AEmail: "+em+"%0AAddress: "+ad+"%0AItems: "+itm+"%0ATotal: Rs."+tot;
-  cart=[]; document.getElementById("cCount").innerText="0"; closeM("cartModal");
-  alert("🎉 Order Confirm! Tracking ID: "+tid);
-  window.open("https://wa.me"+waNum+"?text="+msg,"_blank");
-}
-function checkTrack(){
-  var id=document.getElementById("tInp").value.trim().toUpperCase(), ords=JSON.parse(localStorage.getItem("nomanOrders")||"[]");
-  var f=ords.find(x=>x.id===id);
-  document.getElementById("tRes").innerHTML=f?"✅ <b>"+f.id+"</b>: "+f.status:"❌ ID nahi mila.";
-}
-function openAI(mode){
-  var b=document.getElementById("aiBox"); b.style.display="block";
-  if(mode==="chat"){ b.classList.add("left-mode"); document.getElementById("aiTitle").innerText="🔍 AI Chat Search & Order"; }
-  else { b.classList.remove("left-mode"); document.getElementById("aiTitle").innerText="🎙️ AI Bolne Wala Assistant"; speakText("Assalam o Alaikum! Main Noman VIP Store ka AI Assistant hoon. Boliye aap ko kya chahiye?"); }
-}
-function speakText(txt){
-  if('speechSynthesis' in window){ window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(txt.replace(/<[^>]*>/g, '')); u.lang = 'hi-IN'; window.speechSynthesis.speak(u); }
-}
-function startVoice(){
-  var Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!Rec) return alert("Aap ka browser voice support nahi karta, neeche type karein.");
-  var r = new Rec(); r.lang = 'ur-PK';
-  r.onresult = function(e){ document.getElementById("aiInp").value = e.results.transcript; askAI(true); };
-  r.start();
-}
-function askAI(useVoice){
-  var inp=document.getElementById("aiInp"), t=inp.value.trim(); if(!t)return;
-  var box=document.getElementById("aiMsgs"); box.innerHTML+='<div class="m-usr">'+t+'</div>'; inp.value="";
-  var l=t.toLowerCase(), rep="";
-  if(step===1){oData.p=t;step=2;rep="Size (40 se 44 ya S, M, L, XL), Color aur Quantity likhein:";}
-  else if(step===2){oData.d=t;step=3;rep="Apna Poora Naam aur WhatsApp Number likhein:";}
-  else if(step===3){oData.n=t;step=4;rep="Apna Email aur Ghar ka Mukammal Address likhein:";}
-  else if(step===4){oData.a=t;step=0;var tid="NV-"+Math.floor(1000+Math.random()*9000);rep="Order Confirm ho gaya hai! Tracking ID: "+tid+". JazzCash aur EasyPaisa number hai 0325-1753556. WhatsApp par bhej raha hoon.";window.open("https://wa.me"+waNum+"?text=*AI ORDER*%0AID:"+tid+"%0AItem:"+oData.p+" ("+oData.d+")%0AName:"+oData.n+"%0AAddr:"+oData.a,"_blank");}
-  else if(l.includes("order")||l.includes("book")||l.includes("lena")){step=1;rep="Zaroor! Batayein aap ko konsa Shoe ya Suit chahiye?";}
-  else if(l.includes("jazz")||l.includes("easy")||l.includes("account")||l.includes("number")){rep="JazzCash aur EasyPaisa account number hai 0325-1753556, Muhammad Noman ke naam par.";}
+  <!-- SHOES -->
+  <div class="product-card" data-cat="shoes" data-name="VIP Patent Leather Loafers Black Brown 4500">
+    <div class="gallery-box">
+      <div class="main-pic"><img id="main_p1" src="shoes-brand.png" alt="Shoes"></div>
+      <div class="side-angles">
+        <div class="ang-thumb active" onclick="viewSide('main_p1', this, 'full')"><img src="shoes-brand.png" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="ang-thumb" onclick="viewSide('main_p1', this, 'top right')"><img src="shoes-brand.png" style="object-position:top right;"></div>
+        <div class="ang-thumb" onclick="viewSide('main_p1', this, 'bottom left')"><img src="shoes-brand.png" style="object-position:bottom left;"></div>
+        <div class="ang-thumb" onclick="viewSide('main_p1', this, 'bottom right')"><img src="shoes-brand.png" style="object-position:bottom right;"></div>
+      </div>
+    </div>
+    <h3 style="color:#FBBF24;margin:10px 0 4px;">VIP Patent Leather Loafers</h3>
+    <div style="color:#10B981;font-weight:bold;font-size:18px;">Rs. 4,500</div>
+    <p style="font-size:11px;color:#9CA3AF;">VIP No.1 Import Pure Leather</p>
+    <div class="sel-row">
+      <select id="sz1"><option>40</option><option>41</option><option selected>42</option><option>43</option><option>44</option></select>
+      <select id="cl1"><option>Jet Black</option><option>Dark Brown</option><option>Burgundy</option></select>
+    </div>
+    <select id="qt1"><option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option><option value="20">Qty: 20</option></select>
+    <button class="btn-gold" onclick="addCart('VIP Patent Leather Loafers',4500,'sz1','cl1','qt1')">🛒 Add to Cart</button>
+    <button class="btn-wa" onclick="waQuick('VIP Patent Leather Loafers',4500,'sz1','cl1','qt1')">💬 Direct WhatsApp Order</button>
+  </div>
+
+  <!-- SUIT -->
+  <div class="product-card" data-cat="suits" data-name="Royal 3-Piece Tuxedo Suit Black Navy 8500">
+    <div class="gallery-box">
+      <div class="main-pic"><img id="main_p2" src="dress-vip.png" alt="Suit"></div>
+      <div class="side-angles">
+        <div class="ang-thumb active" onclick="viewSide('main_p2', this, 'full')"><img src="dress-vip.png" style="width:100%;height:100%;object-fit:contain;"></div>
+        <div class="ang-thumb" onclick="viewSide('main_p2', this, 'top right')"><img src="dress-vip.png" style="object-position:top right;"></div>
+        <div class="ang-thumb" onclick="viewSide('main_p2', this, 'bottom left')"><img src="dress-vip.png" style="object-position:bottom left;"></div>
+        <div class="ang-thumb" onclick="viewSide('main_p2', this, 'bottom right')"><img src="dress-vip.png" style="object-position:bottom right;"></div>
+      </div>
+    </div>
+    <h3 style="color:#FBBF24;margin:10px 0 4px;">Royal 3-Piece Tuxedo Suit</h3>
+    <div style="color:#10B981;font-weight:bold;font-size:18px;">Rs. 8,500</div>
+    <p style="font-size:11px;color:#9CA3AF;">VIP No.1 Turkish Wool Fabric</p>
+    <div class="sel-row">
+      <select id="sz2"><option>S</option><option selected>M</option><option>L</option><option>XL</option></select>
+      <select id="cl2"><option>Charcoal Black</option><option>Navy Blue</option><option>Royal Grey</option></select>
+    </div>
+    <select id="qt2"><option value="1">Qty: 1</option><option value="2">Qty: 2</option><option value="5">Qty: 5</option><option value="10">Qty: 10</option><option value="20">Qty: 20</option></select>
